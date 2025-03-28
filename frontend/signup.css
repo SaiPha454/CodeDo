@@ -58,7 +58,7 @@ body {
 .signup-form {
   width: 100%;
   max-width: 397px;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 .form-group {
@@ -91,7 +91,7 @@ body {
 .submit-button {
   width: 242px;
   height: 44px;
-  background-color: #2cbb5d;
+  background-color: #E35205;
   border-radius: 15px;
   color: #fff;
   font-size: 16px;
@@ -101,6 +101,29 @@ body {
   display: block;
   margin: 0 auto;
   font-family: Inter, sans-serif;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.login-link span {
+  color: #808080;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+}
+
+.login-link a {
+  color: #E35205;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 991px) {

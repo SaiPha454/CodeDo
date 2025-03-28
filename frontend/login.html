@@ -1,13 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../pyslibs/core/src/core.css">
-    <script type="module" src="../pyslibs/core/src/core.js"></script>
-</head>
-<body>
-    <h1>Login</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In - CodeDo</title>
+    <link rel="stylesheet" href="/static/login.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="site-header">
+        <h1 class="brand-name">CodeDo</h1>
+      </header>
+      <main class="main-content">
+        <h2 class="form-title">Log In</h2>
+        <form id="login-form" class="login-form" method="post" action="/login">
+          <div class="form-group">
+            <label class="input-label">Email</label>
+            <input type="email" class="form-input" id="email" name="email" />
+          </div>
+          <div class="form-group">
+            <label class="input-label">Password</label>
+            <input type="password" class="form-input" id="password" name="password" />
+          </div>
+          <button type="submit" class="submit-button">Log In</button>
+          <div class="signup-link">
+            <span>Don't have an account? </span>
+            <a href="/signup">Sign Up</a>
+          </div>
+        </form>
+      </main>
+    </div>
+  </body>
 </html>

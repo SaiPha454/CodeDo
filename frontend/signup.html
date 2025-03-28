@@ -5,16 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up - CodeDo</title>
     <link rel="stylesheet" href="/static/signup.css" />
-    <!-- <link rel="stylesheet" href="https://pyscript.net/releases/2025.3.1/core.css" />
-    <script type="module" src="https://pyscript.net/releases/2025.3.1/core.js"></script> -->
-    
-    <link rel="stylesheet" href="static/pyslibs/core/dist/core.css" >
-    <script type="module" src="static/pyslibs/core/dist/core.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    
   </head>
   <body>
     <div class="app-container">
@@ -23,24 +17,26 @@
       </header>
       <main class="main-content">
         <h2 class="form-title">Sign Up</h2>
-        <form id="signup-form" class="signup-form" onsubmit="return false">
+        <form id="signup-form" class="signup-form" method="post" action="/signup">
           <div class="form-group">
             <label class="input-label">Full Name</label>
-            <input type="text" class="form-input" id="username"/>
+            <input type="text" class="form-input" id="username" name="username"/>
           </div>
           <div class="form-group">
             <label class="input-label">Email</label>
-            <input type="email" class="form-input" id="email" />
+            <input type="email" class="form-input" id="email" name="email" />
           </div>
           <div class="form-group">
             <label class="input-label">Password</label>
-            <input type="password" class="form-input" id="password" />
+            <input type="password" class="form-input" id="password" name="password" />
           </div>
           <button type="submit" class="submit-button">Sign Up</button>
+          <div class="login-link">
+            <span>Already have an account? </span>
+            <a href="/login">Log In</a>
+          </div>
         </form>
       </main>
     </div>
-    <!-- <script type="py" src="static/pyscripts/signup.py" defer ></script> -->
-     <!-- <py-script src="static/pyscripts/signup.py" ></py-script> -->
   </body>
 </html>
