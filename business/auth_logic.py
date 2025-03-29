@@ -2,15 +2,20 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.exc import SQLAlchemyError
 from fastapi import HTTPException
-from models.user_model import User  # Updated import
+from models.user_model import User, UserRole  # Updated import
 import bcrypt
 
 class AuthLogic:
     @staticmethod
-    async def signup(username: str, email: str, password: str, db: AsyncSession):
+    async def signup(username: str, email: str, password: str, role: str, db: AsyncSession):
         try:
             hashed_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
-            new_user = User(username=username, email=email, password=hashed_password.decode("utf-8"))
+            new_user = User(
+                username=username,
+                email=email,
+                password=hashed_password.decode("utf-8"),
+                role=UserRole(role)
+            )
             db.add(new_user)
             await db.commit()
             return new_user.id

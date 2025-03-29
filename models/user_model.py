@@ -1,5 +1,10 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Enum
+import enum
 from dbcon import Base
+
+class UserRole(enum.Enum):
+    participant = "participant"
+    questioner = "questioner"
 
 class User(Base):
     __tablename__ = "users"
@@ -8,3 +13,4 @@ class User(Base):
     username = Column(String, unique=True, nullable=False)
     email = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
+    role = Column(Enum(UserRole), nullable=False)

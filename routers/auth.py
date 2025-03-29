@@ -26,10 +26,11 @@ async def signup(
     username: str = Form(...),
     email: str = Form(...),
     password: str = Form(...),
+    role: str = Form(...),
     db: AsyncSession = Depends(get_db)
 ):
     try:
-        user_id = await AuthLogic.signup(username, email, password, db)
+        user_id = await AuthLogic.signup(username, email, password, role, db)
         request.session["user_id"] = user_id
         return RedirectResponse(url="/dashboard", status_code=302)
     except HTTPException as e:
