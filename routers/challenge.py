@@ -60,3 +60,26 @@ async def get_challenge(id: int, db: AsyncSession = Depends(get_db)):
     if not challenge:
         raise HTTPException(status_code=404, detail="Challenge not found")
     return challenge
+
+@challenge_router.delete("/{id}/")
+async def delete_challenge(id: int, request: Request, db: AsyncSession = Depends(get_db)):
+    user_id = request.session.get("user_id")
+    if not user_id:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    result = await db.execute(select(Challenge).where(Challenge.id == id, Challenge.created_by == user_id))
+    challenge = result.scalar_one_or_none()
+
+    if not challenge:
+        raise HTTPException(status_code=404, detail="Challenge not found or not authorized to delete")
+
+    await db.delete(challenge)
+    await db.commit()
+
+    # Fetch updated challenges list
+    result = await db.execute(select(Challenge).where(Challenge.created_by == user_id))
+    challenges = result.scalars().all()
+
+    return templates.TemplateResponse(
+        "dashboard.html", {"request": request, "challenges": challenges}
+    )

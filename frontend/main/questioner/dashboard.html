@@ -8,7 +8,8 @@
     <script type="module" src="https://pyscript.net/releases/2025.3.1/core.js"></script>
     <link rel="stylesheet" href="/static/main/questioner/header.css" />
     <link rel="stylesheet" href="/static/main/questioner/dashboard.css" />
-    <link rel="stylesheet" href="/static/main/questioner/modal.css" />
+    <link rel="stylesheet" href="/static/main/questioner/create_modal.css" />
+    <link rel="stylesheet" href="/static/main/questioner/delete_challenge_modal.css" />
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
 
@@ -41,13 +42,14 @@
               <span class="challenge-date">Created: <span>{{ challenge.created_at }}</span></span>
             </div>
             <div class="challenge-actions">
-              <button class="action-button">
+              <button class="action-button" >
                 <svg xmlns="http://www.w3.org/2000/svg" class="action-icon" viewBox="0 0 24 24">
                   <path d="M16.7574 2.99666L14.7574 4.99666H5V18.9967H19V9.23926L21 7.23926V19.9967C21 20.5489 20.5523 20.9967 20 20.9967H4C3.44772 20.9967 3 20.5489 3 19.9967V3.99666C3 3.44437 3.44772 2.99666 4 2.99666H16.7574ZM20.4853 2.09766L21.8995 3.51187L12.7071 12.7043L11.2929 12.7043L11.2929 11.2901L20.4853 2.09766Z"/>
                 </svg>
               </button>
-              <button class="action-button">
-                <svg xmlns="http://www.w3.org/2000/svg" class="action-icon" viewBox="0 0 24 24">
+              <button data-challenge-id="{{ challenge.id }}" class="action-button" mpy-click="show_delete_modal">
+                <!-- delete-challenge-submit-button -->
+                <svg  xmlns="http://www.w3.org/2000/svg" class="action-icon" viewBox="0 0 24 24">
                   <path d="M12 10.5858L16.2426 6.34317L17.6568 7.75738L13.4142 12L17.6568 16.2426L16.2426 17.6568L12 13.4142L7.75736 17.6568L6.34315 16.2426L10.5858 12L6.34315 7.75738L7.75736 6.34317L12 10.5858Z"/>
                 </svg>
               </button>
@@ -77,7 +79,8 @@
           </form>
         </div>
       </div>
-
+      <!-- Delete Modal -->
+      {% include "delete_challenge_modal.html" %}
       <footer class="site-footer">
         <p class="footer-text">Copyright © 2025 CodeDo Contact US codedo42@gmail.com | Terms & Policy</p>
       </footer>
