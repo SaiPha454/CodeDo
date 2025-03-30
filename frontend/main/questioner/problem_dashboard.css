@@ -101,6 +101,7 @@ body {
     font-size: 16px;
     cursor: pointer;
     margin-left: auto;
+    text-decoration: none;
 }
 
 .problems-list {
@@ -210,6 +211,7 @@ body {
     .add-problem-btn {
         margin-left: 0;
         align-self: flex-end;
+        
     }
 
     .problem-content {

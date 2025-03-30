@@ -1,0 +1,160 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #1A1A1A;
+    color: white;
+    min-height: 100vh;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px 88px;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 20px;
+    }
+
+    .breadcrumb {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .breadcrumb-main {
+        font-size: 18px;
+    }
+
+    .breadcrumb-separator {
+        font-size: 18px;
+    }
+
+    .breadcrumb-current {
+        font-size: 18px;
+    }
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 35px;
+}
+
+.breadcrumb-container {
+    flex: 1;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 24px;
+}
+
+.breadcrumb-main {
+    color: #E35205;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.breadcrumb-main:hover {
+    opacity: 0.8;
+}
+
+.breadcrumb-separator {
+    color: #666;
+}
+
+.breadcrumb-current {
+    color: white;
+}
+
+/* Form Styles */
+.form-container {
+    background: #2A2A2A;
+    border-radius: 9px;
+    padding: 40px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 640px) {
+    .form-container {
+        padding: 20px;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.form-group label {
+    font-size: 16px;
+    color: #FFF;
+}
+
+.form-group input,
+.form-group textarea {
+    background: #333;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding: 12px;
+    color: #FFF;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #E35205;
+}
+
+.form-group textarea {
+    resize: none;
+    height: 100px;
+}
+
+.form-group textarea[x-model="formData.statement"] {
+    height: 200px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (max-width: 640px) {
+    .button-container {
+        justify-content: center;
+    }
+}
+
+button {
+    padding: 12px 24px;
+    border-radius: 15px;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 400;
+    background: #E35205;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}

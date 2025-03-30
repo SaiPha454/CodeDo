@@ -53,3 +53,9 @@ async def list_problems_for_challenge(challenge_id: int, request: Request, db: A
     return templates.TemplateResponse(
         "problem_dashboard.html", {"request": request, "problems": problems, "challenge_id": challenge_id}
     )
+
+@problem_router.get("/challenges/{challenge_id}/problems/new")
+async def show_problem_creation_form(challenge_id: int, request: Request):
+    return templates.TemplateResponse(
+        "problem_creation_form.html", {"request": request, "challenge_id": challenge_id}
+    )

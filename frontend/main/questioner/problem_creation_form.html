@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeDo - Problems</title>
+    <link rel="stylesheet" href="/static/main/questioner/problem_creation_form.css" />
+    <link rel="stylesheet" href="/static/main/questioner/footer.css" />
+    <link rel="stylesheet" href="/static/main/questioner/header.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="app-container">
+        {% include "header.html" %}
+        <main class="main-content">
+            <div class="page-header">
+                <div class="breadcrumb-container">
+                    <div class="breadcrumb">
+                        <a href="/challenges" class="breadcrumb-main">ADA Test 2025 - Midterm</a>
+                        <span class="breadcrumb-separator">/</span>
+                        <span class="breadcrumb-current">Problems</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-container">
+                <form action="/submit-problem" method="POST">
+                  <div class="form-group">
+                    <label for="title">Problem Title</label>
+                    <input type="text" id="title" name="title" placeholder="Enter problem title" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="statement">Problem Statement</label>
+                    <textarea id="statement" name="statement" placeholder="Enter problem statement" required></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="input">Input Format</label>
+                    <textarea id="input" name="input" placeholder="Describe input format" required></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="output">Output Format</label>
+                    <textarea id="output" name="output" placeholder="Describe output format" required></textarea>
+                  </div>
+                  <div class="button-container">
+                    <button type="submit">Create Problem</button>
+                  </div>
+                </form>
+            </div>
+        </main>
+        {% include "footer.html" %}
+    </div>
+</body>
+</html>

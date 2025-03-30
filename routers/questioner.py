@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from models.user_model import UserRole
 from dbcon import get_db
 from routers.challenge import list_challenges
-from routers.problem import list_problems_for_challenge
+from routers.problem import list_problems_for_challenge, show_problem_creation_form
 
 templates = Jinja2Templates(directory="frontend/main/questioner")
 
@@ -17,12 +17,19 @@ def verify_role(request: Request, required_role: UserRole):
         raise HTTPException(status_code=403, detail="Access forbidden")
 
 @questioner_router.get("/dashboard", response_class=HTMLResponse)
-async def questioner_dashboard(request: Request, db: AsyncSession = Depends(get_db)):
+async def display_questioner_dashboard(request: Request, db: AsyncSession = Depends(get_db)):
     verify_role(request, UserRole.questioner)
     return await list_challenges(request, db)
 
 
 @questioner_router.get("/challenges/{challenge_id}/problems")
-async def problems_dashboard_for_challenge(challenge_id: int, request: Request, db: AsyncSession = Depends(get_db)):
+async def display_problems_dashboard_for_challenge(challenge_id: int, request: Request, db: AsyncSession = Depends(get_db)):
     verify_role(request, UserRole.questioner)
     return await list_problems_for_challenge(challenge_id, request, db)
+
+
+@questioner_router.get("/challenges/{challenge_id}/problems/new", response_class=HTMLResponse)
+async def display_problem_creation_form(challenge_id: int, request: Request):
+    verify_role(request, UserRole.questioner)
+    return await show_problem_creation_form(challenge_id, request)
+
