@@ -1,0 +1,16 @@
+from sqlalchemy import Column, Integer, String, Text, ForeignKey
+from sqlalchemy.orm import relationship
+from dbcon import Base
+from models.test_case import TestCase
+
+class Problem(Base):
+    __tablename__ = "problems"
+    id = Column(Integer, primary_key=True, index=True)
+    challenge_id = Column(Integer, ForeignKey("challenges.id"), nullable=False)
+    title = Column(String, nullable=False)
+    problem_definition = Column(Text, nullable=False)
+    input_format = Column(Text, nullable=True)
+    output_format = Column(Text, nullable=True)
+
+    challenge = relationship("Challenge", back_populates="problems")
+    test_cases = relationship("TestCase", back_populates="problem")

@@ -1,7 +1,10 @@
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Request, Depends
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from sqlalchemy.ext.asyncio import AsyncSession
 from models.user_model import UserRole
+from dbcon import get_db
+from routers.challenge import list_challenges
 
 templates = Jinja2Templates(directory="frontend/main/questioner")
 
@@ -13,6 +16,6 @@ def verify_role(request: Request, required_role: UserRole):
         raise HTTPException(status_code=403, detail="Access forbidden")
 
 @questioner_router.get("/dashboard", response_class=HTMLResponse)
-async def questioner_dashboard(request: Request):
+async def questioner_dashboard(request: Request, db: AsyncSession = Depends(get_db)):
     verify_role(request, UserRole.questioner)
-    return templates.TemplateResponse("dashboard.html", {"request": request})
+    return await list_challenges(request, db)

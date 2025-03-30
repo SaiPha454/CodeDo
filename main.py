@@ -9,6 +9,8 @@ from dbcon import Base, engine
 from routers import auth
 from routers.participant import participant_router
 from routers.questioner import questioner_router
+from routers.challenge import challenge_router
+from routers.problem import problem_router
 
 templates = Jinja2Templates(directory="frontend/main")
 
@@ -27,6 +29,10 @@ app.include_router(auth.router)
 # Include participant and questioner routers
 app.include_router(participant_router)
 app.include_router(questioner_router)
+
+# Include challenge and problem routers
+app.include_router(challenge_router)
+app.include_router(problem_router)
 
 @app.exception_handler(404)
 async def not_found_handler(request, exc):
