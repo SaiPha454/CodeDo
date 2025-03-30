@@ -2,6 +2,9 @@ from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import relationship
 from dbcon import Base
 from models.test_case import TestCase
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
+from fastapi import HTTPException
 
 class Problem(Base):
     __tablename__ = "problems"

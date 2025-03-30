@@ -49,7 +49,8 @@ def create_problem(event):
     def on_success(response):
         console.log(response.status)
         if response.status == 303 or response.status == 200:
-            window.location.href = response.url
+            # window.location.href = response.url
+            response.text().then(lambda text: setattr(document.body, 'innerHTML', text))
         elif response.status == 404:
             error_message_div.textContent = "Error: Challenge not found."
             error_message_div.style.display = "block"
@@ -70,4 +71,33 @@ def create_problem(event):
         'method': 'POST',
         'headers': headers,
         'body': json.dumps(form_data)
+    }).then(on_success).catch(on_error)
+
+def confirm_delete_problem(event):
+    # Define success and error handlers
+    modal = document.getElementById('deleteProblemModal')
+    challenge_id = modal.getAttribute('data-challenge-id')
+    problem_id = modal.getAttribute('data-problem-id')
+    error_message = document.getElementById('deleteProblemError')
+    error_message.style.display = "none"  # Hide the error message initially
+
+    def on_success(response):
+        if response.status == 303 or response.status == 200:
+            window.location.href = f"/questioners/challenges/{challenge_id}/problems"
+        else:
+            error_message.style.display = "block"
+            error_message.textContent = "Failed to delete problem. Please try again later."
+
+    def on_error(error):
+        error_message.style.display = "block"
+        error_message.textContent = f"Error deleting problem: {error}"
+
+    # Create headers using Object from js
+    headers = Object.create(None)
+    headers['Content-Type'] = 'application/json'
+
+    # Send DELETE request
+    fetch(f"/problems/{problem_id}?challenge_id={challenge_id}", {
+        'method': 'DELETE',
+        'headers': headers
     }).then(on_success).catch(on_error)

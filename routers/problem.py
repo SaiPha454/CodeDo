@@ -60,3 +60,18 @@ async def show_problem_creation_form(challenge_id: int, request: Request):
     return templates.TemplateResponse(
         "problem_creation_form.html", {"request": request, "challenge_id": challenge_id}
     )
+
+@problem_router.delete("/{problem_id}/")
+async def delete_problem_route(problem_id: int, challenge_id: int, db: AsyncSession = Depends(get_db)):
+    # Fetch the problem to ensure it exists
+    result = await db.execute(select(Problem).where(Problem.id == problem_id))
+    problem = result.scalar_one_or_none()
+    if not problem:
+        raise HTTPException(status_code=404, detail="Problem not found")
+
+    # Delete the problem
+    await db.delete(problem)
+    await db.commit()
+
+    # Redirect to the updated problems list
+    return RedirectResponse(url=f"/questioners/challenges/{challenge_id}/problems", status_code=303)
