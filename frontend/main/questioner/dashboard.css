@@ -138,16 +138,6 @@
     fill: #808080;
   }
   
-  .site-footer {
-    padding: 20px 87px;
-  }
-  
-  .footer-text {
-    color: #fff;
-    font-size: 14px;
-    font-weight: 400;
-  }
-  
   @media (max-width: 991px) {
     .main-content,
     .site-footer {

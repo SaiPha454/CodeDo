@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeDo - Problems</title>
+    <link rel="stylesheet" href="/static/main/questioner/problem_dashboard.css" />
+    <link rel="stylesheet" href="/static/main/questioner/footer.css" />
+    <link rel="stylesheet" href="/static/main/questioner/header.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="app-container">
+        {% include "header.html" %}
+        <main class="main-content">
+            <div class="page-header">
+                <div class="breadcrumb-container">
+                    <div class="breadcrumb">
+                        <a href="/challenges" class="breadcrumb-main">ADA Test 2025 - Midterm</a>
+                        <span class="breadcrumb-separator">/</span>
+                        <span class="breadcrumb-current">Problems</span>
+                    </div>
+                </div>
+                <button class="add-problem-btn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 1V15M1 8H15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>Add Problem</span>
+                </button>
+            </div>
+            <div class="problems-list">
+
+                <div class="problem-card">
+                    <div class="problem-content">
+                        <div class="problem-info">
+                            <div class="code-icon">
+                                <div>&lt;/&gt;</div>
+                            </div>
+                            <div class="problem-title">Longest Common Subsequence</div>
+                        </div>
+                        <div class="problem-actions">
+                            <button class="btn btn-primary">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M8 3.83337V13.1667M3.33333 8.50004H12.6667" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span>Add TestCases</span>
+                            </button>
+                            <button class="btn btn-secondary btn-icon-text">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M11.1716 1.49777L9.83827 2.8311H3.33333V12.1645H12.6667V5.6595L14 4.32617V12.8311C14 13.1993 13.7015 13.4978 13.3333 13.4978H2.66667C2.29848 13.4978 2 13.1993 2 12.8311V2.16444C2 1.79624 2.29848 1.49777 2.66667 1.49777H11.1716ZM13.6569 0.898438L14.5997 1.84124L8.47141 7.96953H7.52861V7.02673L13.6569 0.898438Z" fill="white"/>
+                                </svg>
+                                <span>Edit</span>
+                            </button>
+                            <button class="btn btn-danger btn-icon-only">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M2.66667 4H13.3333M12 4V13.3333C12 13.7015 11.7015 14 11.3333 14H4.66667C4.29848 14 4 13.7015 4 13.3333V4M6 4V2.66667C6 2.29848 6.29848 2 6.66667 2H9.33333C9.70152 2 10 2.29848 10 2.66667V4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-content">
+                        <div class="problem-info">
+                            <div class="code-icon">
+                                <div>&lt;/&gt;</div>
+                            </div>
+                            <div class="problem-title">Graph Topology</div>
+                        </div>
+                        <div class="problem-actions">
+                            <button class="btn btn-primary">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M8 3.83337V13.1667M3.33333 8.50004H12.6667" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span>Add TestCases</span>
+                            </button>
+                            <button class="btn btn-secondary btn-icon-text">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M11.1716 1.49777L9.83827 2.8311H3.33333V12.1645H12.6667V5.6595L14 4.32617V12.8311C14 13.1993 13.7015 13.4978 13.3333 13.4978H2.66667C2.29848 13.4978 2 13.1993 2 12.8311V2.16444C2 1.79624 2.29848 1.49777 2.66667 1.49777H11.1716ZM13.6569 0.898438L14.5997 1.84124L8.47141 7.96953H7.52861V7.02673L13.6569 0.898438Z" fill="white"/>
+                                </svg>
+                                <span>Edit</span>
+                            </button>
+                            <button class="btn btn-danger btn-icon-only">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M2.66667 4H13.3333M12 4V13.3333C12 13.7015 11.7015 14 11.3333 14H4.66667C4.29848 14 4 13.7015 4 13.3333V4M6 4V2.66667C6 2.29848 6.29848 2 6.66667 2H9.33333C9.70152 2 10 2.29848 10 2.66667V4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+        {% include "footer.html" %}
+    </div>
+</body>
+</html>

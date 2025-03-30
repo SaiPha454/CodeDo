@@ -1,0 +1,293 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #1A1A1A;
+    color: white;
+    min-height: 100vh;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    background-color: #2A2A2A;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 33px 88px;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.logo {
+    color: #E35205;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.profile-image {
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px 88px;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 35px;
+}
+
+.breadcrumb-container {
+    flex: 1;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 24px;
+}
+
+.breadcrumb-main {
+    color: #E35205;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.breadcrumb-main:hover {
+    opacity: 0.8;
+}
+
+.breadcrumb-separator {
+    color: #666;
+}
+
+.breadcrumb-current {
+    color: white;
+}
+
+.add-problem-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #E35205;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.problems-list {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.problem-card {
+    background-color: #2A2A2A;
+    border-radius: 9px;
+    padding: 27px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.problem-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.problem-info {
+    display: flex;
+    align-items: center;
+    gap: 57px;
+}
+
+.code-icon {
+    background-color: #333;
+    border-radius: 8px;
+    padding: 9px 8px 9px 7px;
+    color: #E35205;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.problem-title {
+    font-size: 18px;
+    color: white;
+}
+
+.problem-actions {
+    display: flex;
+    gap: 16px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn span {
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #E35205;
+}
+
+.btn-secondary {
+    background-color: #4A4A4A;
+}
+
+.btn-danger {
+    background-color: #F44;
+    padding: 8px;
+}
+
+.btn-icon-only {
+    padding: 8px;
+    width: fit-content;
+}
+
+.footer {
+    text-align: center;
+    padding: 25px 88px;
+    color: white;
+    font-size: 14px;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .header-content,
+    .main-content,
+    .footer {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+    }
+
+    .add-problem-btn {
+        margin-left: 0;
+        align-self: flex-end;
+    }
+
+    .problem-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .problem-actions {
+        width: 100%;
+        display: flex;
+    }
+
+    .btn-primary {
+        flex: 1;
+    }
+
+    .btn-icon-text {
+        width: auto;
+        flex: 0 0 auto;
+    }
+
+    .btn-icon-only {
+        width: auto;
+        flex: 0 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-content,
+    .main-content,
+    .footer {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .profile-image {
+        width: 32px;
+        height: 32px;
+    }
+
+    .breadcrumb {
+        font-size: 18px;
+    }
+
+    .add-problem-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    .problem-info {
+        gap: 20px;
+    }
+
+    .code-icon {
+        padding: 6px;
+        font-size: 14px;
+    }
+
+    .problem-title {
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .btn-icon-only {
+        padding: 6px;
+    }
+
+    .footer {
+        font-size: 12px;
+        padding: 15px;
+    }
+}
