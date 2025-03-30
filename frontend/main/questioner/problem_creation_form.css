@@ -128,12 +128,24 @@ body {
 }
 
 .form-group textarea {
-    resize: none;
+    resize: vertical;
     height: 100px;
+    min-height: 100px;
 }
 
 .form-group textarea[x-model="formData.statement"] {
     height: 200px;
+}
+
+.error-message {
+    color: #FF4C4C; /* Bright red for better visibility */
+    background-color: #2A2A2A;
+    border: 1px solid #FF4C4C;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    display: none; /* Hidden by default */
 }
 
 .button-container {
