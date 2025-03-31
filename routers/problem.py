@@ -7,7 +7,7 @@ from models.test_case import TestCase
 from dbcon import get_db
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
-
+import json
 problem_router = APIRouter(prefix="/problems", tags=["problems"])
 templates = Jinja2Templates(directory="frontend/main/questioner")
 
@@ -143,7 +143,11 @@ async def show_problem_add_test_case_form(
     # Fetch associated test cases
     test_case_result = await db.execute(select(TestCase).where(TestCase.problem_id == problem_id))
     test_cases = test_case_result.scalars().all()
-
+    for test_case in test_cases:
+        # Deserialize input_data from JSON string to list
+        test_case.input_data = json.loads(test_case.input_data)
+        print(test_case.input_data)
+    
     # Render the test case form with test cases
     return templates.TemplateResponse(
         "test_case_form.html", {
