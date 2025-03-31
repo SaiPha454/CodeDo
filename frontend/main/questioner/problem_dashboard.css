@@ -297,3 +297,7 @@ body {
         padding: 15px;
     }
 }
+
+.add-test-case-button {
+    text-decoration: none;
+}

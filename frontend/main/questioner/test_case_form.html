@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeDo - Problems</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.3.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2025.3.1/core.js"></script>
+    <link rel="stylesheet" href="/static/main/questioner/test_case_form.css" />
+    <link rel="stylesheet" href="/static/main/questioner/footer.css" />
+    <link rel="stylesheet" href="/static/main/questioner/header.css" />
+    <link rel="stylesheet" href="/static/main/questioner/delete_problem_modal.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="app-container">
+        {% include "header.html" %}
+        <main class="main-content">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item primary">ADA Test 2025 - Midterm</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item secondary text-truncate">Longest Common Subsequence with Dynamic Programming</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item current">Add TestCases</span>
+            </div>
+    
+            <div class="test-cases-container">
+                <!-- Test Case 1 -->
+                <div class="test-case-card">
+                    <div class="test-case-header">
+                        <h3 class="test-case-title">Test Case 1</h3>
+                        <button class="remove-button">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M2.667 4H13.334M12 4V13.333C12 13.702 11.702 14 11.334 14H4.667C4.299 14 4 13.702 4 13.333V4M6 4V2.667C6 2.298 6.299 2 6.667 2H9.334C9.702 2 10 2.298 10 2.667V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Remove
+                        </button>
+                    </div>
+    
+                    <div class="parameters-section">
+                        <div class="parameters-header">
+                            <h4 class="section-title">Input Parameters</h4>
+                            <button class="add-param-button">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M6 2.5V9.5M2.5 6H9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                                Add Parameter
+                            </button>
+                        </div>
+    
+                        <div class="parameter-inputs">
+                            <div class="parameter-row">
+                                <div class="parameter-name">
+                                    <label>Parameter Name</label>
+                                    <input type="text" placeholder="e.g. array, target, n">
+                                </div>
+                                <div class="parameter-value">
+                                    <label>Value</label>
+                                    <input type="text" placeholder="e.g. [1, 2, 3], 10, 5">
+                                </div>
+                                <button class="remove-param-button">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M2.667 4H13.334M12 4V13.333C12 13.702 11.702 14 11.334 14H4.667C4.299 14 4 13.702 4 13.333V4M6 4V2.667C6 2.298 6.299 2 6.667 2H9.334C9.702 2 10 2.298 10 2.667V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="output-section">
+                        <label>Expected Output</label>
+                        <textarea placeholder="Enter expected output..."></textarea>
+                    </div>
+                </div>
+    
+                <!-- Add more test cases here -->
+    
+            </div>
+    
+            <div class="actions">
+                <button class="add-test-case-button">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 3.833V13.167M3.333 8.5H12.666" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    Add Another Test Case
+                </button>
+                <button class="finish-button">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M13.334 4L6 11.333L2.667 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Finish
+                </button>
+            </div>
+        </main>
+        {% include "delete_problem_modal.html" %}
+        {% include "footer.html" %}
+    </div>
+    <script type="mpy" src="/static/main/questioner/test_case_form.py" ></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

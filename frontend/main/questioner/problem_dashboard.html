@@ -42,12 +42,12 @@
                             <div class="problem-title">{{ problem.title }}</div>
                         </div>
                         <div class="problem-actions">
-                            <button class="btn btn-primary">
+                            <a class="btn btn-primary add-test-case-button" href="/questioners/challenges/{{ problem.challenge_id }}/problems/{{ problem.id }}/testcases">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                                     <path d="M8 3.83337V13.1667M3.33333 8.50004H12.6667" stroke="white" stroke-width="2" stroke-linecap="round"/>
                                 </svg>
                                 <span>Add TestCases</span>
-                            </button>
+                            </a>
                             <a class="btn btn-secondary btn-icon-text problem-edit-btn" href="/questioners/challenges/{{ problem.challenge_id }}/problems/{{ problem.id }}/edit">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                                     <path d="M11.1716 1.49777L9.83827 2.8311H3.33333V12.1645H12.6667V5.6595L14 4.32617V12.8311C14 13.1993 13.7015 13.4978 13.3333 13.4978H2.66667C2.29848 13.4978 2 13.1993 2 12.8311V2.16444C2 1.79624 2.29848 1.49777 2.66667 1.49777H11.1716ZM13.6569 0.898438L14.5997 1.84124L8.47141 7.96953H7.52861V7.02673L13.6569 0.898438Z" fill="white"/>

@@ -125,3 +125,21 @@ async def update_problem_route(
 
     # Redirect to the updated problems list
     return RedirectResponse(url=f"/questioners/challenges/{problem.challenge_id}/problems", status_code=303)
+
+@problem_router.get("/{problem_id}/testcases")
+async def show_problem_add_test_case_form(
+    challenge_id: int,
+    problem_id: int,
+    request: Request,
+    db: AsyncSession = Depends(get_db)
+):
+    # Fetch the problem to edit
+    result = await db.execute(select(Problem).where(Problem.id == problem_id))
+    problem = result.scalar_one_or_none()
+    if not problem:
+        raise HTTPException(status_code=404, detail="Problem not found")
+
+    # Render the test case form
+    return templates.TemplateResponse(
+        "test_case_form.html", {"request": request, "problem": problem, "challenge_id": challenge_id}
+    )
