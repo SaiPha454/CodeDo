@@ -129,7 +129,6 @@ async def update_problem_route(
 
 @problem_router.get("/{problem_id}/testcases")
 async def show_problem_add_test_case_form(
-    challenge_id: int,
     problem_id: int,
     request: Request,
     db: AsyncSession = Depends(get_db)
@@ -153,7 +152,6 @@ async def show_problem_add_test_case_form(
         "test_case_form.html", {
             "request": request,
             "problem": problem,
-            "challenge_id": challenge_id,
             "test_cases": test_cases
         }
     )

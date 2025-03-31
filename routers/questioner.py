@@ -38,9 +38,8 @@ async def display_problem_edit_form(challenge_id: int, problem_id: int, request:
     verify_role(request, UserRole.questioner)
     return await show_problem_edit_form(challenge_id, problem_id, request, db)
 
-@questioner_router.get("/challenges/{challenge_id}/problems/{problem_id}/testcases", response_class=HTMLResponse)
-async def display_test_cases_for_problem(challenge_id: int, problem_id: int, request: Request, db: AsyncSession = Depends(get_db)):
-    print("hello")
+@questioner_router.get("/problems/{problem_id}/testcases", response_class=HTMLResponse)
+async def display_test_cases_for_problem(problem_id: int, request: Request, db: AsyncSession = Depends(get_db)):
     verify_role(request, UserRole.questioner)
-    return await show_problem_add_test_case_form(challenge_id, problem_id, request, db)
+    return await show_problem_add_test_case_form(problem_id, request, db)
 

@@ -135,4 +135,8 @@ def submit_test_cases(event):
         "method": "POST",
         "headers": headers,
         "body": payload
-    }).then(lambda response: response.json()).then(lambda data: console.log("Response:", data)).catch(lambda error: console.error("Error:", error))
+    }).then(lambda response: response.text()).then(lambda html: (
+        document.open(),
+        document.write(html),
+        document.close()
+    )).catch(lambda error: console.error("Error:", error))
