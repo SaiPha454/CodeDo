@@ -11,6 +11,7 @@ from routers.participant import participant_router
 from routers.questioner import questioner_router
 from routers.challenge import challenge_router
 from routers.problem import problem_router
+from routers.test_case import test_case_router
 
 templates = Jinja2Templates(directory="frontend/main")
 
@@ -33,6 +34,9 @@ app.include_router(questioner_router)
 # Include challenge and problem routers
 app.include_router(challenge_router)
 app.include_router(problem_router)
+
+# Include challenge and problem routers
+app.include_router(test_case_router)
 
 @app.exception_handler(404)
 async def not_found_handler(request, exc):

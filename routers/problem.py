@@ -3,6 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from models.problem import Problem
 from models.challenge import Challenge
+from models.test_case import TestCase
 from dbcon import get_db
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
@@ -139,7 +140,16 @@ async def show_problem_add_test_case_form(
     if not problem:
         raise HTTPException(status_code=404, detail="Problem not found")
 
-    # Render the test case form
+    # Fetch associated test cases
+    test_case_result = await db.execute(select(TestCase).where(TestCase.problem_id == problem_id))
+    test_cases = test_case_result.scalars().all()
+
+    # Render the test case form with test cases
     return templates.TemplateResponse(
-        "test_case_form.html", {"request": request, "problem": problem, "challenge_id": challenge_id}
+        "test_case_form.html", {
+            "request": request,
+            "problem": problem,
+            "challenge_id": challenge_id,
+            "test_cases": test_cases
+        }
     )
