@@ -184,6 +184,10 @@ body {
     width: fit-content;
 }
 
+.problem-edit-btn{
+    text-decoration: none!important;
+}
+
 .footer {
     text-align: center;
     padding: 25px 88px;

@@ -101,3 +101,68 @@ def confirm_delete_problem(event):
         'method': 'DELETE',
         'headers': headers
     }).then(on_success).catch(on_error)
+
+def update_problem(event):
+    # Prevent default form submission
+    console.log("Loading update_problem.py")
+
+    # Get problem and challenge IDs from the button's data attributes
+    button = event.currentTarget
+    problem_id = button.getAttribute('data-problem-id')
+    challenge_id = button.getAttribute('data-challenge-id')
+
+    # Get form inputs
+    title_input = document.getElementById('title')
+    statement_input = document.getElementById('statement')
+    input_format_input = document.getElementById('input')
+    output_format_input = document.getElementById('output')
+    error_message_div = document.getElementById('error-message')
+
+    # Validate required fields
+    if not title_input.value.strip():
+        error_message_div.textContent = "Error: Title is required."
+        error_message_div.style.display = "block"
+        return
+    if not statement_input.value.strip():
+        error_message_div.textContent = "Error: Problem statement is required."
+        error_message_div.style.display = "block"
+        return
+    if not input_format_input.value.strip():
+        error_message_div.textContent = "Error: Input format is required."
+        error_message_div.style.display = "block"
+        return
+    if not output_format_input.value.strip():
+        error_message_div.textContent = "Error: Output format is required."
+        error_message_div.style.display = "block"
+        return
+
+    # Collect form data
+    form_data = {
+        "title": title_input.value,
+        "problem_definition": statement_input.value.replace("\n", "\\n"),
+        "input_format": input_format_input.value.replace("\n", "\\n"),
+        "output_format": output_format_input.value.replace("\n", "\\n")
+    }
+
+    # Define success and error handlers
+    def on_success(response):
+        if response.status == 303 or response.status == 200:
+            window.location.href = f"/questioners/challenges/{challenge_id}/problems"
+        else:
+            response.text().then(lambda text: setattr(error_message_div, 'textContent', text))
+            error_message_div.style.display = "block"
+
+    def on_error(error):
+        error_message_div.textContent = f"Failed to update problem: {error}"
+        error_message_div.style.display = "block"
+
+    # Create headers using Object from js
+    headers = Object.create(None)
+    headers['Content-Type'] = 'application/json'
+
+    # Send PUT request
+    fetch(f"/problems/{problem_id}/", {
+        'method': 'PUT',
+        'headers': headers,
+        'body': json.dumps(form_data)
+    }).then(on_success).catch(on_error)

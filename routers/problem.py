@@ -75,3 +75,53 @@ async def delete_problem_route(problem_id: int, challenge_id: int, db: AsyncSess
 
     # Redirect to the updated problems list
     return RedirectResponse(url=f"/questioners/challenges/{challenge_id}/problems", status_code=303)
+
+@problem_router.get("/{problem_id}/edit")
+async def show_problem_edit_form(
+    challenge_id: int,
+    problem_id: int,
+    request: Request,
+    db: AsyncSession = Depends(get_db)
+):
+    # Fetch the problem to edit
+    result = await db.execute(select(Problem).where(Problem.id == problem_id))
+    problem = result.scalar_one_or_none()
+    if not problem:
+        raise HTTPException(status_code=404, detail="Problem not found")
+
+    # Format \n to actual newlines for display in the form
+    problem.problem_definition = problem.problem_definition.replace("\\n", "\n")
+    problem.input_format = problem.input_format.replace("\\n", "\n")
+    problem.output_format = problem.output_format.replace("\\n", "\n")
+
+    # Render the edit form
+    return templates.TemplateResponse(
+        "problem_edit_form.html", {"request": request, "problem": problem, "challenge_id": challenge_id}
+    )
+
+@problem_router.put("/{problem_id}/")
+async def update_problem_route(
+    problem_id: int,
+    title: str = Body(...),
+    problem_definition: str = Body(...),
+    input_format: str = Body(...),
+    output_format: str = Body(...),
+    db: AsyncSession = Depends(get_db)
+):
+    # Fetch the problem to ensure it exists
+    result = await db.execute(select(Problem).where(Problem.id == problem_id))
+    problem = result.scalar_one_or_none()
+    if not problem:
+        raise HTTPException(status_code=404, detail="Problem not found")
+
+    # Update the problem fields
+    problem.title = title
+    problem.problem_definition = problem_definition
+    problem.input_format = input_format
+    problem.output_format = output_format
+
+    # Commit the changes
+    await db.commit()
+
+    # Redirect to the updated problems list
+    return RedirectResponse(url=f"/questioners/challenges/{problem.challenge_id}/problems", status_code=303)
