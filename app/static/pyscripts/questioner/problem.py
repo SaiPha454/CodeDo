@@ -49,8 +49,8 @@ def create_problem(event):
     def on_success(response):
         console.log(response.status)
         if response.status == 303 or response.status == 200:
-            # window.location.href = response.url
-            response.text().then(lambda text: setattr(document.body, 'innerHTML', text))
+            console.log("Success:", response.url)
+            window.location.href = response.url
         elif response.status == 404:
             error_message_div.textContent = "Error: Challenge not found."
             error_message_div.style.display = "block"
