@@ -42,7 +42,7 @@ def confirm_delete_challenge(event):
 
     # Create headers using Object from js
     headers = Object.create(None)
-    fetch(f'/questioners/challenges/{challenge_id}/', {
+    fetch(f'/questioners/challenges/{challenge_id}', {
         'method': 'DELETE',
         'headers': headers
     }).then(on_success).catch(on_error)

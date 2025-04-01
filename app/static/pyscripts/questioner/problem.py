@@ -162,7 +162,7 @@ def update_problem(event):
     headers['Content-Type'] = 'application/json'
 
     # Send PUT request
-    fetch(f"/problems/{problem_id}/", {
+    fetch(f"/questioners/challenges/{challenge_id}/problems/{problem_id}/", {
         'method': 'PUT',
         'headers': headers,
         'body': json.dumps(form_data)

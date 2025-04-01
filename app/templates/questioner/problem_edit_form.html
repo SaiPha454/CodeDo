@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeDo - Problems</title>
+    <title>CodeDo - Edit Problem</title>
     <link rel="stylesheet" href="https://pyscript.net/releases/2025.3.1/core.css" />
     <script type="module" src="https://pyscript.net/releases/2025.3.1/core.js"></script>
-    <link rel="stylesheet" href="/static/css/questioner/problem_creation_form.css" />
+    <link rel="stylesheet" href="/static/css/questioner/problem_edit_form.css" />
     <link rel="stylesheet" href="/static/css/footer.css" />
     <link rel="stylesheet" href="/static/css/header.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
@@ -20,31 +20,31 @@
                     <div class="breadcrumb">
                         <a href="/questioners/challenges" class="breadcrumb-main">ADA Test 2025 - Midterm</a>
                         <span class="breadcrumb-separator">/</span>
-                        <span class="breadcrumb-current">Create Problem</span>
+                        <span class="breadcrumb-current">Edit Problem</span>
                     </div>
                 </div>
             </div>
             <div class="form-container">
-                <form action="/submit-problem" onsubmit="return false;">
+                <form  onsubmit="return false;">
                   <div class="form-group">
                     <label for="title">Problem Title</label>
-                    <input type="text" id="title" name="title" placeholder="Enter problem title" required />
+                    <input type="text" id="title" name="title" value="{{ problem.title }}" required />
                   </div>
                   <div class="form-group">
                     <label for="statement">Problem Statement</label>
-                    <textarea id="statement" name="statement" placeholder="Enter problem statement" required></textarea>
+                    <textarea id="statement" name="statement" required>{{ problem.problem_definition }}</textarea>
                   </div>
                   <div class="form-group">
                     <label for="input">Input Format</label>
-                    <textarea id="input" name="input" placeholder="Describe input format" required></textarea>
+                    <textarea id="input" name="input" required>{{ problem.input_format }}</textarea>
                   </div>
                   <div class="form-group">
                     <label for="output">Output Format</label>
-                    <textarea id="output" name="output" placeholder="Describe output format" required></textarea>
+                    <textarea id="output" name="output" required>{{ problem.output_format }}</textarea>
                   </div>
                   <div id="error-message" class="error-message" style="display: none;"></div>
                   <div class="button-container">
-                    <button type="submit" data-challenge-id="{{challenge_id}}" mpy-click="create_problem">Create Problem</button>
+                    <button type="submit" data-problem-id="{{ problem.id }}" data-challenge-id="{{ challenge_id }}" mpy-click="update_problem">Update Problem</button>
                   </div>
                 </form>
             </div>

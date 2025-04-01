@@ -104,7 +104,7 @@ async def show_problem_edit_form(
 
     # Render the edit form
     return templates.TemplateResponse(
-        "problem_edit_form.html", {"request": request, "problem": problem, "challenge_id": challenge_id}
+        "questioner/problem_edit_form.html", {"request": request, "problem": problem, "challenge_id": challenge_id}
     )
 
 @router.put("/{problem_id}/")
@@ -156,7 +156,7 @@ async def show_problem_add_test_case_form(
     
     # Render the test case form with test cases
     return templates.TemplateResponse(
-        "test_case_form.html", {
+        "questioner/testcase_form.html", {
             "request": request,
             "problem": problem,
             "test_cases": test_cases
