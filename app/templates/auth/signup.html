@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - CodeDo</title>
+    <link rel="stylesheet" href="/static/css/auth/header.css" />
+    <link rel="stylesheet" href="/static/css/auth/signup.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      {% include 'auth/header.html' %}
+      <main class="main-content">
+        <h2 class="form-title">Sign Up</h2>
+        <form id="signup-form" class="signup-form" method="post" action="/auth/signup">
+          <div class="form-group">
+            <label class="input-label">Full Name</label>
+            <input type="text" class="form-input" id="fullName" name="username" required />
+          </div>
+          <div class="form-group">
+            <label class="input-label">Email</label>
+            <input type="email" class="form-input" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label class="input-label">Password</label>
+            <input type="password" class="form-input" id="password" name="password" required minlength="6" />
+          </div>
+          <div class="form-group">
+            <label class="input-label">Select Your Role</label>
+            <div class="role-selector">
+              <label class="role-option">
+                <input type="radio" name="role" value="participant" required class="role-radio" />
+                <div class="role-content">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="role-icon" viewBox="0 0 24 24">
+                    <path d="M12 4C14.2091 4 16 5.79086 16 8C16 10.2091 14.2091 12 12 12C9.79086 12 8 10.2091 8 8C8 5.79086 9.79086 4 12 4ZM12 14C16.4183 14 20 15.7909 20 18V20H4V18C4 15.7909 7.58172 14 12 14Z"/>
+                  </svg>
+                  <span class="role-title">Participant</span>
+                  <span class="role-subtitle">(Student)</span>
+                </div>
+              </label>
+              <label class="role-option">
+                <input type="radio" name="role" value="questioner" required class="role-radio" />
+                <div class="role-content">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="role-icon" viewBox="0 0 24 24">
+                    <path d="M20 17H22V19H2V17H4V10C4 5.58172 7.58172 2 12 2C16.4183 2 20 5.58172 20 10V17ZM9 21H15V23H9V21Z"/>
+                  </svg>
+                  <span class="role-title">Questioner</span>
+                  <span class="role-subtitle">(Lecturer)</span>
+                </div>
+              </label>
+            </div>
+          </div>
+          <button type="submit" class="submit-button">Sign Up</button>
+          <div class="login-link">
+            <span>Already have an account? </span>
+            <a href="/auth/login">Log In</a>
+          </div>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>
