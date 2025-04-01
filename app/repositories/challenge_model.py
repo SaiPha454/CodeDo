@@ -12,5 +12,5 @@ class Challenge(Base):
     created_by = Column(Integer, ForeignKey("users.id"), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Use string reference for Problem to avoid circular import issues
-    problems = relationship("Problem", back_populates="challenge")
+    # Add cascade delete for associated problems
+    problems = relationship("Problem", back_populates="challenge", cascade="all, delete-orphan")

@@ -9,7 +9,7 @@ from fastapi import HTTPException
 class Problem(Base):
     __tablename__ = "problems"
     id = Column(Integer, primary_key=True, index=True)
-    challenge_id = Column(Integer, ForeignKey("challenges.id"), nullable=False)
+    challenge_id = Column(Integer, ForeignKey("challenges.id", ondelete="CASCADE"), nullable=False)
     title = Column(String, nullable=False)
     problem_definition = Column(Text, nullable=False)
     input_format = Column(Text, nullable=True)
