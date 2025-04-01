@@ -52,6 +52,11 @@ class QuestionerProblemRepository:
     async def get_test_cases_by_problem_id(problem_id: int, db: AsyncSession):
         result = await db.execute(select(TestCase).where(TestCase.problem_id == problem_id))
         test_cases = result.scalars().all()
-        for test_case in test_cases:
-            test_case.input_data = json.loads(test_case.input_data)
+        # for test_case in test_cases:
+        #     try:
+        #         # Deserialize input_data from JSON string to list
+        #         test_case.input_data = json.loads(test_case.input_data) if test_case.input_data else []
+        #     except json.JSONDecodeError:
+        #         # Handle invalid JSON gracefully
+        #         test_case.input_data = []
         return test_cases

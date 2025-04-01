@@ -1,39 +1,39 @@
-from js import document, console, fetch, Object
+from js import document, console, fetch, Object, window
 import json
 
-def add_parameter(event):
-    test_case_id = event.currentTarget.getAttribute('data-test-case-id')
-    params_container_id = f"test-case-{test_case_id}-params"
-    params_container = document.getElementById(params_container_id)
-    new_param_id = params_container.children.length + 1
+# def add_parameter(event):
+#     test_case_id = event.currentTarget.getAttribute('data-test-case-id')
+#     params_container_id = f"test-case-{test_case_id}-params"
+#     params_container = document.getElementById(params_container_id)
+#     new_param_id = params_container.children.length + 1
 
-    # Create a new parameter row
-    new_param = document.createElement("div")
-    new_param.className = "parameter-row"
-    new_param.innerHTML = f"""
-        <div class='parameter-value'>
-            <label>Parameter {new_param_id}</label>
-            <input type='text' placeholder='e.g. [1, 2, 3], 10, 5'>
-        </div>
-        <button class='remove-param-button' mpy-click='remove_parameter'>
-            <svg width='16' height='16' viewBox='0 0 16 16' fill='none'>
-                <path d='M2.667 4H13.334M12 4V13.333C12 13.702 11.702 14 11.334 14H4.667C4.299 14 4 13.702 4 13.333V4M6 4V2.667C6 2.298 6.299 2 6.667 2H9.334C9.702 2 10 2.298 10 2.667V4' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/>
-            </svg>
-        </button>
-    """
-    params_container.appendChild(new_param)
+#     # Create a new parameter row
+#     new_param = document.createElement("div")
+#     new_param.className = "parameter-row"
+#     new_param.innerHTML = f"""
+#         <div class='parameter-value'>
+#             <label>Parameter {new_param_id}</label>
+#             <input type='text' placeholder='e.g. [1, 2, 3], 10, 5'>
+#         </div>
+#         <button class='remove-param-button' mpy-click='remove_parameter'>
+#             <svg width='16' height='16' viewBox='0 0 16 16' fill='none'>
+#                 <path d='M2.667 4H13.334M12 4V13.333C12 13.702 11.702 14 11.334 14H4.667C4.299 14 4 13.702 4 13.333V4M6 4V2.667C6 2.298 6.299 2 6.667 2H9.334C9.702 2 10 2.298 10 2.667V4' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/>
+#             </svg>
+#         </button>
+#     """
+#     params_container.appendChild(new_param)
 
-def remove_parameter(event):
-    button = event.currentTarget
-    parameter_row = button.closest(".parameter-row")
-    params_container = parameter_row.parentElement
-    parameter_row.remove()
+# def remove_parameter(event):
+#     button = event.currentTarget
+#     parameter_row = button.closest(".parameter-row")
+#     params_container = parameter_row.parentElement
+#     parameter_row.remove()
 
-    # Reassign IDs to remaining parameters
-    for index, param in enumerate(params_container.children):
-        label = param.querySelector(".parameter-value label")
-        if label:
-            label.textContent = f"Parameter {index + 1}"
+#     # Reassign IDs to remaining parameters
+#     for index, param in enumerate(params_container.children):
+#         label = param.querySelector(".parameter-value label")
+#         if label:
+#             label.textContent = f"Parameter {index + 1}"
 
 def add_test_case(event):
     test_cases_container = document.getElementById("test-cases-container")
@@ -115,18 +115,17 @@ def submit_test_cases(event):
         "problem_id": int(problem_id),
         "test_cases": test_cases
     }
-
+    console.log("Payload:", payload)
     payload = json.dumps(payload)
     headers = Object.create(None)
     headers["Content-Type"] = "application/json"
 
+    def on_success(response):
+        if response.url:
+            window.location.href = response.url
     # Send the data to the backend
-    fetch("/test_cases", {
+    fetch("./", {
         "method": "POST",
         "headers": headers,
-        "body": payload
-    }).then(lambda response: response.text()).then(lambda html: (
-        document.open(),
-        document.write(html),
-        document.close()
-    )).catch(lambda error: console.error("Error:", error))
+        "body": json.dumps(test_cases)
+    }).then(on_success).catch(lambda error: console.error("Error:", error))

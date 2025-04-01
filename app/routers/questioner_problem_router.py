@@ -4,7 +4,7 @@ from fastapi.responses import RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from services.questioner_problem_service import QuestionerProblemService
 from config.dbcon import get_db
-
+from routers import questioner_testcase_router
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
@@ -69,18 +69,20 @@ async def update_problem_route(
     await QuestionerProblemService.update_problem(problem_id, title, problem_definition, input_format, output_format, db)
     return RedirectResponse(url=f"/questioners/challenges/{problem_id}/problems", status_code=303)
 
-@router.get("/{problem_id}/testcases")
-async def show_problem_add_test_case_form(
-    problem_id: int,
-    request: Request,
-    db: AsyncSession = Depends(get_db)
-):
-    test_cases = await QuestionerProblemService.get_test_cases(problem_id, db)
-    problem = await QuestionerProblemService.get_problem(problem_id, db)
-    return templates.TemplateResponse(
-        "questioner/testcase_form.html", {
-            "request": request,
-            "problem": problem,
-            "test_cases": test_cases
-        }
-    )
+# @router.get("/{problem_id}/testcases")
+# async def show_problem_add_test_case_form(
+#     problem_id: int,
+#     request: Request,
+#     db: AsyncSession = Depends(get_db)
+# ):
+#     test_cases = await QuestionerProblemService.get_test_cases(problem_id, db)
+#     problem = await QuestionerProblemService.get_problem(problem_id, db)
+#     return templates.TemplateResponse(
+#         "questioner/testcase_form.html", {
+#             "request": request,
+#             "problem": problem,
+#             "test_cases": test_cases
+#         }
+#     )
+
+router.include_router(questioner_testcase_router.router, prefix="/{problem_id}/testcases", tags=["testcases"])

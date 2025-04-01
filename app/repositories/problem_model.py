@@ -16,4 +16,4 @@ class Problem(Base):
     output_format = Column(Text, nullable=True)
 
     challenge = relationship("Challenge", back_populates="problems")
-    test_cases = relationship("TestCase", back_populates="problem")
+    test_cases = relationship("TestCase", back_populates="problem", cascade="all, delete-orphan")
