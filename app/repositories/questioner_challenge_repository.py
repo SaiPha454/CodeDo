@@ -1,7 +1,9 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy import delete
 from repositories.challenge_model import Challenge
+from repositories.problem_model import Problem
 
 class QuestionerChallengeRepository:
     @staticmethod
@@ -23,9 +25,18 @@ class QuestionerChallengeRepository:
 
     @staticmethod
     async def delete_challenge(challenge_id: int, user_id: int, db: AsyncSession):
+        # Fetch the challenge
         result = await db.execute(select(Challenge).where(Challenge.id == challenge_id, Challenge.created_by == user_id))
         challenge = result.scalar_one_or_none()
-        if challenge:
-            await db.delete(challenge)
-            await db.commit()
+        if not challenge:
+            return None
+
+        # Delete associated problems
+        await db.execute(
+            delete(Problem).where(Problem.challenge_id == challenge_id)
+        )
+
+        # Delete the challenge
+        await db.delete(challenge)
+        await db.commit()
         return challenge
