@@ -3,6 +3,8 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.ext.asyncio import AsyncSession
 from services.questioner_challenge_service import QuestionerChallengeService
 from config.dbcon import get_db
+from routers import questioner_problem_router
+
 
 templates = Jinja2Templates(directory="templates")
 router = APIRouter(prefix="/questioners/challenges", tags=["challenges"])
@@ -36,3 +38,6 @@ async def delete_challenge(id: int, request: Request, db: AsyncSession = Depends
     return templates.TemplateResponse(
         "questioner/dashboard.html", {"request": request, "challenges": challenges}
     )
+
+
+router.include_router(questioner_problem_router.router, prefix="/{challenge_id}/problems", tags=["problems"])
