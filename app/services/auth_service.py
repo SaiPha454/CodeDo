@@ -1,32 +1,31 @@
+from fastapi import HTTPException, Request
+from fastapi.responses import RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
-from sqlalchemy.exc import SQLAlchemyError
-from fastapi import HTTPException
-from repositories.user_model import User, UserRole  # Updated import
+from repositories.user_model import UserRole
+from repositories.user_repository import UserRepository
 import bcrypt
 
 class AuthLogic:
     @staticmethod
     async def signup(username: str, email: str, password: str, role: str, db: AsyncSession):
-        try:
-            hashed_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
-            new_user = User(
-                username=username,
-                email=email,
-                password=hashed_password.decode("utf-8"),
-                role=UserRole(role)
-            )
-            db.add(new_user)
-            await db.commit()
-            return new_user.id
-        except SQLAlchemyError:
-            await db.rollback()
-            raise HTTPException(status_code=500, detail="Signup failed. Please try again.")
+        role_enum = UserRole(role)
+        return await UserRepository.create_user(username, email, password, role_enum, db)
 
     @staticmethod
     async def login(email: str, password: str, db: AsyncSession):
-        result = await db.execute(select(User).where(User.email == email))
-        user = result.scalar_one_or_none()
+        user = await UserRepository.get_user_by_email(email, db)
         if user and bcrypt.checkpw(password.encode("utf-8"), user.password.encode("utf-8")):
-            return user.id
+            return user.id, user.role.value
         raise HTTPException(status_code=401, detail="Invalid credentials")
+
+    @staticmethod
+    async def setup_session(request: Request, user_id: int, role: str):
+        request.session["user_id"] = user_id
+        request.session["role"] = role
+
+    @staticmethod
+    async def redirect_based_on_role(role: str):
+        if role == UserRole.participant.value:
+            return RedirectResponse(url="/participants/dashboard", status_code=302)
+        elif role == UserRole.questioner.value:
+            return RedirectResponse(url="/questioners/challenges", status_code=302)
