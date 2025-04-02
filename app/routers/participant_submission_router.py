@@ -5,6 +5,7 @@ from config.dbcon import get_db
 from services.participant_submission_service import UserSubmissionService
 from services.participant_problem_service import ParticipantProblemService
 from services.participant_challenge_service import ParticipantChallengeService
+from services.participant_testcase_service import ParticipantTestcaseService
 from fastapi.templating import Jinja2Templates
 from services.auth_service import AuthLogic
 from repositories.user_model import UserRole
@@ -22,12 +23,8 @@ async def get_submission_form(request: Request, problem_id: int, challenge_id: i
     if user.role != UserRole.participant:
         raise HTTPException(status_code=403, detail="Forbidden")
     problem = await ParticipantProblemService.get_problem_detail(user.id, problem_id, db)
-    if not problem:
-        raise HTTPException(status_code=404, detail="Problem not found")
     challenge = await ParticipantChallengeService.get_challenge_by_id(challenge_id, db)
-    if not challenge:
-        raise HTTPException(status_code=404, detail="Challenge not found")
-    sample_testcases = await ParticipantProblemService.get_sample_test_cases(problem_id, db)
+    sample_testcases = await ParticipantTestcaseService.get_sample_test_cases(problem_id, db)
     return templates.TemplateResponse("participant/participant_submission_form.html", {
         "request": request,
         "problem": problem,
@@ -46,16 +43,25 @@ async def submit_solution(
     user_id = request.session.get("user_id")
     if not user_id:
         raise HTTPException(status_code=401, detail="Unauthorized")
-    total_test_cases = 1
-    passed_test_cases = 2
-    await UserSubmissionService.submit_solution(
-        user_id=user_id,
-        problem_id=problem_id,
-        challenge_id=challenge_id,
-        code=code,
-        total_test_cases=total_test_cases,
-        passed_test_cases=passed_test_cases,
-        db=db
-    )
+    problem = await ParticipantProblemService.get_problem(problem_id, db) 
+    challenge = await ParticipantChallengeService.get_challenge_by_id(challenge_id, db) 
+    testcases = await ParticipantTestcaseService.get_test_cases(problem_id, db)
 
-    return RedirectResponse(url=f"/participants/challenges/{challenge_id}", status_code=302)
+    # Evaluate the code
+
+    print("Code : ===========>")
+    print(code)
+
+    # total_test_cases = 1
+    # passed_test_cases = 2
+    # await UserSubmissionService.submit_solution(
+    #     user_id=user_id,
+    #     problem_id=problem_id,
+    #     challenge_id=challenge_id,
+    #     code=code,
+    #     total_test_cases=total_test_cases,
+    #     passed_test_cases=passed_test_cases,
+    #     db=db
+    # )
+    return {"submission_id":1}
+    # return RedirectResponse(url=f"/participants/challenges/{challenge_id}", status_code=302)
