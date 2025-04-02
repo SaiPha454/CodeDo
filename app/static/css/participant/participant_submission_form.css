@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #1A1A1A;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    height: 86px;
+    background-color: #2A2A2A;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 98px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.logo {
+    color: #E35205;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.title {
+    color: #FFF;
+    font-size: 18px;
+}
+
+.submit-btn {
+    background-color: #2CBB5D;
+    color: #FFF;
+    padding: 6px 25px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.submit-btn:hover {
+    transform: scale(1.02);
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    padding: 30px;
+    gap: 10px;
+    height: calc(100vh - 86px);
+}
+
+.problem-panel {
+    width: 50%;
+    background-color: #2A2A2A;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow-y: auto;
+}
+
+.problem-content {
+    padding: 33px;
+}
+
+h1 {
+    color: #FFF;
+    font-size: 26px;
+    margin-bottom: 31px;
+}
+
+.problem-description {
+    color: #FFF;
+    font-size: 14px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.section {
+    margin-bottom: 35px;
+}
+
+h2 {
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.section p {
+    color: #FFF;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.example-label {
+    color: #FFF;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.code-block {
+    background-color: #000;
+    border: 1px solid #524F4F;
+    border-radius: 8px;
+    padding: 11px;
+    color: #FFF;
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-family: monospace;
+}
+
+.editor-panel {
+    width: 50%;
+    background-color: #2A2A2A;
+    border: 1px solid #000;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.editor-header {
+    padding: 28px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #2A2A2A;
+}
+
+.code-icon {
+    color: #2CBB5D;
+    margin-right: 5px;
+}
+
+.editor-header span:last-child {
+    color: #FFF;
+}
+
+.editor-container {
+    flex: 1;
+    background-color: #24292E;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+/* CodeMirror Custom Styles */
+.CodeMirror {
+    height: 100% !important;
+    font-family: 'Azeret Mono', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #24292E !important;
+}
+
+.CodeMirror-scroll {
+    height: 100% !important;
+    overflow-y: auto !important;
+    overflow-x: auto !important;
+}
+
+.CodeMirror-gutters {
+    background-color: #24292E !important;
+    border-right: 1px solid #2A2A2A !important;
+}
+
+.CodeMirror-linenumber {
+    color: #6B7280 !important;
+}
+
+.CodeMirror-scrollbar-filler {
+    background-color: #24292E !important;
+}
+
+/* Main scrollbar styles */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1A1A1A;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4A4A4A;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* CodeMirror specific scrollbar styles */
+.CodeMirror ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.CodeMirror ::-webkit-scrollbar-track {
+    background: #1A1A1A;
+}
+
+.CodeMirror ::-webkit-scrollbar-thumb {
+    background: #4A4A4A;
+    border-radius: 4px;
+}
+
+.CodeMirror ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #4A4A4A #1A1A1A;
+}

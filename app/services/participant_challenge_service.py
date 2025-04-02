@@ -48,3 +48,10 @@ class ParticipantChallengeService:
                 for problem in challenge.problems
             ],
         }
+    @staticmethod
+    async def get_challenge_by_id(challenge_id: int, db: AsyncSession):
+        # Fetch the challenge by ID from the repository
+        challenge = await ParticipantChallengeRepository.get_challenge_by_id(challenge_id, db)
+        if not challenge:
+            raise HTTPException(status_code=404, detail="Challenge not found")
+        return challenge

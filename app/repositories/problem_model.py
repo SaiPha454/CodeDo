@@ -17,3 +17,4 @@ class Problem(Base):
 
     challenge = relationship("Challenge", back_populates="problems")
     test_cases = relationship("TestCase", back_populates="problem", cascade="all, delete-orphan")
+    submissions = relationship("UserSubmission", back_populates="problem")

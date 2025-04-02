@@ -18,12 +18,17 @@
 
         <main class="main-content">
             <div class="breadcrumb">
-                <a href="/participants/dashboard" class="breadcrumb-link">ADA Test 2025 - Midterm</a>
+                <a href="/participants/dashboard" class="breadcrumb-link">{{challenge.title}}</a>
                 <span class="breadcrumb-separator">/</span>
                 <span class="breadcrumb-current">Problems</span>
             </div>
 
             <div class="problems-list">
+
+
+                {% for problem in challenge.problems %}
+
+
                 <div class="problem-card">
                     <div class="problem-icon-container">
                         <svg xmlns="http://www.w3.org/2000/svg" class="problem-icon" viewBox="0 0 24 24">
@@ -31,14 +36,18 @@
                         </svg>
                     </div>
                     <div class="problem-content">
-                        <h3 class="problem-title">Add Two Numbers</h3>
+                        <h3 class="problem-title">{{problem.title}}</h3>
                     </div>
                     <div class="problem-actions">
-                        <button class="solve-button">Solve Problem</button>
+                        <a href="/participants/submissions?problem_id={{problem.problem_id}}&challenge_id={{challenge.challenge_id}}" 
+                        target="_blank"  class="solve-button"
+                        style="text-decoration: none;"> Solve Problem</a>
                     </div>
                 </div>
 
-                <div class="problem-card">
+                {% endfor %}
+
+                <!-- <div class="problem-card">
                     <div class="problem-icon-container">
                         <svg xmlns="http://www.w3.org/2000/svg" class="problem-icon" viewBox="0 0 24 24">
                             <path d="M8.7 15.9L4.8 12L8.7 8.1C9.09 7.71 9.09 7.09 8.7 6.7C8.31 6.31 7.69 6.31 7.3 6.7L2.7 11.3C2.31 11.69 2.31 12.31 2.7 12.7L7.3 17.3C7.69 17.69 8.31 17.69 8.7 17.3C9.09 16.91 9.09 16.29 8.7 15.9ZM15.3 15.9L19.2 12L15.3 8.1C14.91 7.71 14.91 7.09 15.3 6.7C15.69 6.31 16.31 6.31 16.7 6.7L21.3 11.3C21.69 11.69 21.69 12.31 21.3 12.7L16.7 17.3C16.31 17.69 15.69 17.69 15.3 17.3C14.91 16.91 14.91 16.29 15.3 15.9Z"/>
@@ -78,7 +87,7 @@
                     <div class="problem-actions">
                         <button class="solved-button">Solved</button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </main>
 

@@ -18,3 +18,4 @@ class User(Base):
     role = Column(Enum(UserRole), nullable=False)
 
     participant_challenges = relationship("ParticipantChallenge", back_populates="participant")
+    submissions = relationship("UserSubmission", back_populates="user")
