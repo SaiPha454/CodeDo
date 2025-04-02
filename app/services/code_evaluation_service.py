@@ -1,6 +1,10 @@
 import sys
 import io
 import asyncio
+import traceback
+
+class TimeoutException(Exception):
+    pass
 
 class CodeEvaluationService:
     @staticmethod
@@ -18,8 +22,18 @@ class CodeEvaluationService:
             sys.stdout = io.StringIO()
 
             try:
-                # Directly execute the user's code without restrictions for testing purposes
-                exec(user_code, {})
+                # Create a safe execution environment
+                safe_globals = {
+                    "__builtins__": {**__builtins__},
+                    "eval": None,  # Disable eval
+                    "exec": None,  # Disable exec
+                    "open": None,  # Disable file operations
+                    "os": None,    # Disable os module
+                }
+                safe_globals["input"] = input
+
+                # Execute the user's code
+                exec(user_code, safe_globals)
 
                 # Capture the output
                 output = sys.stdout.getvalue().strip()
@@ -30,7 +44,7 @@ class CodeEvaluationService:
                 else:
                     results.append({"status": "Fail", "output": output, "expected": expected_output})
             except Exception as e:
-                # Handle any exceptions during execution
+                # Handle any other exceptions during execution
                 results.append({"status": "Error", "error": str(e)})
             finally:
                 # Restore stdin and stdout
