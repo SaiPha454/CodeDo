@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Body, Depends, HTTPException
+from fastapi import APIRouter, Request, Body, Depends, HTTPException, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from config.dbcon import get_db
@@ -9,6 +9,8 @@ from services.participant_testcase_service import ParticipantTestcaseService
 from fastapi.templating import Jinja2Templates
 from services.auth_service import AuthLogic
 from repositories.user_model import UserRole
+from services.code_evaluation_service import CodeEvaluationService
+from repositories.participant_testcase_repository import ParticipantTestCaseRepository
 
 router = APIRouter(prefix="/participants/submissions", tags=["participants"])
 templates = Jinja2Templates(directory="templates")
@@ -43,18 +45,21 @@ async def submit_solution(
     user_id = request.session.get("user_id")
     if not user_id:
         raise HTTPException(status_code=401, detail="Unauthorized")
-    problem = await ParticipantProblemService.get_problem(problem_id, db) 
-    challenge = await ParticipantChallengeService.get_challenge_by_id(challenge_id, db) 
-    testcases = await ParticipantTestcaseService.get_test_cases(problem_id, db)
 
-    # Evaluate the code
+    # Fetch test cases for the problem
+    test_cases = await ParticipantTestCaseRepository.get_test_cases(problem_id, db)
 
-    print("Code : ===========>")
-    print(code)
+    # Evaluate the user's code
+    evaluation_results = await CodeEvaluationService.evaluate_code(code, test_cases)
 
-    # total_test_cases = 1
-    # passed_test_cases = 2
-    # await UserSubmissionService.submit_solution(
+    # Calculate the number of passed test cases
+    passed_test_cases = sum(1 for result in evaluation_results if result["status"] == "Pass")
+    total_test_cases = len(test_cases)
+    print("=========================================================")
+    print(evaluation_results)
+    print(f"Total Test Cases: {total_test_cases}, Passed Test Cases: {passed_test_cases}")
+    # Save the submission
+    # submission = await UserSubmissionService.submit_solution(
     #     user_id=user_id,
     #     problem_id=problem_id,
     #     challenge_id=challenge_id,
@@ -63,5 +68,6 @@ async def submit_solution(
     #     passed_test_cases=passed_test_cases,
     #     db=db
     # )
-    return {"submission_id":1}
-    # return RedirectResponse(url=f"/participants/challenges/{challenge_id}", status_code=302)
+    return evaluation_results
+    # Redirect to the report page with submission_id
+    # return RedirectResponse(url=f"/participants/submissions/{submission.id}/report", status_code=302)

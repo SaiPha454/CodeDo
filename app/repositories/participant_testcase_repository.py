@@ -3,6 +3,7 @@ from sqlalchemy.future import select
 from repositories.test_case_model import TestCase
 
 class ParticipantTestCaseRepository:
+    
     @staticmethod
     async def get_first_two_test_cases(problem_id: int, db: AsyncSession):
         result = await db.execute(
@@ -11,6 +12,7 @@ class ParticipantTestCaseRepository:
             .limit(2)
         )
         return result.scalars().all()
+    
     @staticmethod
     async def get_test_cases(problem_id: int, db: AsyncSession):
         result = await db.execute(
