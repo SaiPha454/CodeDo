@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - CodeDo</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.3.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2025.3.1/core.js"></script>
+
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/participant/dashboard.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+</head>
+  <body>
+    <div class="app-container">
+        {%include 'header.html' %}
+        
+        <main class="main-content">
+          <div class="challenges-header">
+            <h2 class="page-title">Joined Challenges</h2>
+          </div>
+      
+          <div class="challenges-list">
+            {% for challenge in challenges %}
+            <div class="challenge-card">
+              <div class="challenge-icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" class="challenge-icon" viewBox="0 0 24 24">
+                    <path d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 12.75 2.715 7.179a.5.5 0 0 1 0-.858l8.771-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z"/>
+                  </svg>
+              </div>
+              <div class="challenge-content">
+                <h3 class="challenge-title">{{ challenge.title }}</h3>
+                <span class="challenge-problems">Problems : <span>{{ challenge.num_problems }}</span></span>
+                <span class="challenge-problems">Created At: <span>{{ challenge.created_at }}</span></span>
+              </div>
+              <div class="challenge-actions">
+                <a class="action-button" href="/participants/challenges/{{ challenge.challenge_id }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="action-icon" viewBox="0 0 24 24">
+                    <path d="M13.1714 12.0007L8.22168 7.05093L9.63589 5.63672L15.9999 12.0007L9.63589 18.3646L8.22168 16.9504L13.1714 12.0007Z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </main>
+      
+        {%include 'footer.html' %}
+      </div>
+
+    <script type="mpy" src="/static/pyscripts/questioner/modal.py"></script>
+    <script type="mpy" src="/static/pyscripts/questioner/challenge.py"></script>
+  </body>
+</html>

@@ -10,6 +10,7 @@ class UserRepository:
     async def create_user(username: str, email: str, password: str, role: UserRole, db: AsyncSession):
         try:
             hashed_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
+            print(f"Hashed password: {hashed_password}", role, username, email)
             new_user = User(
                 username=username,
                 email=email,

@@ -4,12 +4,12 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import delete
 from repositories.challenge_model import Challenge
 from repositories.problem_model import Problem
-
-class QuestionerChallengeRepository:
-    @staticmethod
-    async def get_challenges_by_user(user_id: int, db: AsyncSession):
-        result = await db.execute(select(Challenge).where(Challenge.created_by == user_id))
-        return result.scalars().all()
+from repositories.challenge_repository import ChallengeRepository
+class QuestionerChallengeRepository(ChallengeRepository):
+    # @staticmethod
+    # async def get_challenges_by_user(user_id: int, db: AsyncSession):
+    #     result = await db.execute(select(Challenge).where(Challenge.created_by == user_id))
+    #     return result.scalars().all()
 
     @staticmethod
     async def create_challenge(title: str, user_id: int, db: AsyncSession):
@@ -18,10 +18,10 @@ class QuestionerChallengeRepository:
         await db.commit()
         return new_challenge
 
-    @staticmethod
-    async def get_challenge_by_id(challenge_id: int, db: AsyncSession):
-        result = await db.execute(select(Challenge).where(Challenge.id == challenge_id))
-        return result.scalar_one_or_none()
+    # @staticmethod
+    # async def get_challenge_by_id(challenge_id: int, db: AsyncSession):
+    #     result = await db.execute(select(Challenge).where(Challenge.id == challenge_id))
+    #     return result.scalar_one_or_none()
 
     @staticmethod
     async def delete_challenge(challenge_id: int, user_id: int, db: AsyncSession):

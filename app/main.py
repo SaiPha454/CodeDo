@@ -11,6 +11,9 @@ from config.dbcon import Base, engine
 from routers import auth_router
 from routers import questioner_router
 from routers import questioner_challenge_router
+from routers import participant_router
+from routers import participant_challenge_router
+from routers import participant_join_challenge_router
 
 templates = Jinja2Templates(directory="templates")
 
@@ -26,7 +29,9 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 app.include_router(auth_router.router)
 # app.include_router(questioner_router.router)
 app.include_router(questioner_challenge_router.router)
-
+app.include_router(participant_router.router)
+app.include_router(participant_challenge_router.router)
+app.include_router(participant_join_challenge_router.router)
 
 @app.exception_handler(401)
 async def not_found_handler(request, exc):

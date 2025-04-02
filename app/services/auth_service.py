@@ -29,3 +29,12 @@ class AuthLogic:
             return RedirectResponse(url="/participants/dashboard", status_code=302)
         elif role == UserRole.questioner.value:
             return RedirectResponse(url="/questioners/challenges", status_code=302)
+    @staticmethod
+    async def get_current_user(request: Request, db: AsyncSession):
+        user_id = request.session.get("user_id")
+        if not user_id:
+            raise HTTPException(status_code=401, detail="Not authenticated")
+        user = await UserRepository.get_user_by_id(user_id, db)
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        return user

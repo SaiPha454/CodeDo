@@ -14,3 +14,4 @@ class Challenge(Base):
 
     # Add cascade delete for associated problems
     problems = relationship("Problem", back_populates="challenge", cascade="all, delete-orphan")
+    participant_challenges = relationship("ParticipantChallenge", back_populates="challenge")
