@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from services.questioner_problem_service import QuestionerProblemService
 from repositories.participant_problem_repository import ParticipantProblemRepository
-from repositories.participant_submission_repository import UserSubmissionRepository
+from repositories.participant_submission_repository import ParticipantSubmissionRepository  # Updated import
 from fastapi import HTTPException
 
 
@@ -12,7 +12,7 @@ class ParticipantProblemService:
         problem = await QuestionerProblemService.get_problem(problem_id, db)
 
         # Fetch the submission for the problem
-        submission = await UserSubmissionRepository.get_submission_status(user_id, problem_id, db)
+        submission = await ParticipantSubmissionRepository.get_submission_status(user_id, problem_id, db)
 
         # Attach the submission to the problem details
         problem.submission = submission

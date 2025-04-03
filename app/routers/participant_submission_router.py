@@ -17,7 +17,6 @@ templates = Jinja2Templates(directory="templates")
 
 @router.get("/", response_class=HTMLResponse)
 async def get_submission_form(request: Request, problem_id: int, challenge_id: int, db: AsyncSession = Depends(get_db)):
-    
     user = await AuthLogic.get_current_user(request, db)
     if not user:
         return RedirectResponse(url="/auth/login", status_code=302)
@@ -27,11 +26,14 @@ async def get_submission_form(request: Request, problem_id: int, challenge_id: i
     problem = await ParticipantProblemService.get_problem_detail(user.id, problem_id, db)
     challenge = await ParticipantChallengeService.get_challenge_by_id(challenge_id, db)
     sample_testcases = await ParticipantTestcaseService.get_sample_test_cases(problem_id, db)
+    submission_status = await UserSubmissionService.get_problem_status(user.id, problem_id, db)  # Fetch submission status
+
     return templates.TemplateResponse("participant/participant_submission_form.html", {
         "request": request,
         "problem": problem,
         "challenge": challenge,
-        "sample_testcases": sample_testcases
+        "sample_testcases": sample_testcases,
+        "submission_status": submission_status  # Pass status to template
     })
 
 

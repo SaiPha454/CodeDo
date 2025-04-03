@@ -240,3 +240,70 @@ h2 {
     scrollbar-width: thin;
     scrollbar-color: #4A4A4A #1A1A1A;
 }
+
+
+
+.problem-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 31px;
+}
+
+.problem-status{
+    background-color: transparent;
+}
+
+.status-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+}
+.no-submission {
+    color: rgb(189, 41, 41);
+}
+.no-submission-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 4px;
+    background-color: rgba(243, 122, 8, 0.2); /* Light red background */
+}
+
+.fail-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 4px;
+    background-color: red; /* Light yellow background */
+}
+
+.fail-status {
+    color: #FF0000; /* Red text */
+    font-style: italic;
+}
+
+.submitted-status {
+    color: #2CBB5D;
+}
+
+.pass-status {
+    color: #2CBB5D;
+    font-style: italic;
+}
+
+
+.success-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 4px;
+    background-color: #2CBB5D; /* Green dot */
+}
+
+.submitted-container {
+    display: flex;
+    gap: 12px;
+}

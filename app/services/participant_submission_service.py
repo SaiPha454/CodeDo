@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from repositories.participant_submission_repository import UserSubmissionRepository
+from repositories.participant_submission_repository import ParticipantSubmissionRepository
 from typing import List, Dict
 from repositories.participant_submission_model import SubmissionStatus
 from fastapi import HTTPException
@@ -12,7 +12,7 @@ class UserSubmissionService:
         status = SubmissionStatus.Pass if passed_test_cases == total_test_cases else SubmissionStatus.Fail
 
         # Add or update the submission
-        return await UserSubmissionRepository.add_or_update_submission(
+        return await ParticipantSubmissionRepository.add_or_update_submission(
             user_id=user_id,
             problem_id=problem_id,
             challenge_id=challenge_id,
@@ -27,7 +27,7 @@ class UserSubmissionService:
     @staticmethod
     async def get_submission_by_id(submission_id: int, db: AsyncSession):
         # Fetch the submission by ID from the repository
-        submission = await UserSubmissionRepository.get_submission_by_id(submission_id, db)
+        submission = await ParticipantSubmissionRepository.get_submission_by_id(submission_id, db)
         if not submission:
             raise HTTPException(status_code=404, detail="Submission not found")
         return {
@@ -44,19 +44,19 @@ class UserSubmissionService:
 
     @staticmethod
     async def get_problem_status(user_id: int, problem_id: int, db: AsyncSession) -> Dict:
-        submission = await UserSubmissionRepository.get_submission_status(user_id, problem_id, db)
+        submission = await ParticipantSubmissionRepository.get_submission_status(user_id, problem_id, db)
         if not submission:
             return {"status": "Not Submitted", "passed_test_cases": 0, "total_test_cases": 0}
 
         return {
-            "status": submission.status,
+            "status": "Pass" if submission.status == SubmissionStatus.Pass else "Fail",
             "passed_test_cases": submission.passed_test_cases,
-            "total_test_cases": submission.total_test_cases
+            "total_test_cases": submission.total_test_cases,
         }
 
     @staticmethod
     async def get_challenge_submissions(user_id: int, challenge_id: int, db: AsyncSession) -> List[Dict]:
-        submissions = await UserSubmissionRepository.get_submissions_by_challenge(user_id, challenge_id, db)
+        submissions = await ParticipantSubmissionRepository.get_submissions_by_challenge(user_id, challenge_id, db)
         return [
             {
                 "problem_id": submission.problem_id,

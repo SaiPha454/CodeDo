@@ -3,7 +3,7 @@ from sqlalchemy.future import select
 from sqlalchemy.exc import SQLAlchemyError
 from repositories.participant_submission_model import UserSubmission
 import datetime
-class UserSubmissionRepository:
+class ParticipantSubmissionRepository:
     @staticmethod
     async def add_or_update_submission(user_id: int, problem_id: int, challenge_id: int, code: str, status: str, total_test_cases: int, passed_test_cases: int, evaluation_results , db: AsyncSession):
         try:

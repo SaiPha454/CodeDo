@@ -26,33 +26,46 @@
                 class="submit-btn" 
                 mpy-click="submit_code">Submit</button>
         </header>
-
         <main class="main-content">
             <div class="problem-panel">
                 <div class="problem-content">
-                    <h1>{{problem.title}}</h1>
+                    <div class="problem-header">
+                        <h1>{{problem.title}}</h1>
+                     
+                        <div class="problem-status">
+                            {% if submission_status.status == "Not Submitted" %}
+                            <div class="status-text no-submission"> <div class="no-submission-dot"></div> No Submission</div>
+                            {% else %}
+                            <div class="submitted-container">
+                                <div class="status-text submitted-status"> <div class="success-dot"></div> Submitted</div>
+                                {% if submission_status.status == 'Pass' %}
+                                <div class="status-text pass-status"> <div class="success-dot"></div> Pass</div>
+                                {% else %}
+                                <div class="status-text fail-status"> <div class="fail-dot"></div> Fail</div>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+
+                            
+                        </div>
+                    </div>
                     <p class="problem-description">
                        {{problem.problem_definition}}
                     </p>
-
                     <div class="section">
                         <h2>Inputs</h2>
                         <p>
                             {{problem.input_format}}
                         </p>
                     </div>
-
                     <div class="section">
                         <h2>Outputs</h2>
                         <p>
                            {{problem.output_format}}
                         </p>
                     </div>
-
                     <div class="section">
-
                         {% for testcase in sample_testcases %}
-
                             <h2>Example {{ loop.index }}</h2>
                             <p class="example-label">Input:</p>
                             <pre class="code-block">{{testcase.input_data}}</pre>
@@ -62,7 +75,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="editor-panel">
                 <div class="editor-header">
                     <span class="code-icon">&lt;/&gt;</span>
