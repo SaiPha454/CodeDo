@@ -77,4 +77,16 @@ class CodeEvaluationService:
         tasks = [run_in_process(user_code, test_case.input_data, test_case.expected_output) for test_case in test_cases]
         results = await asyncio.gather(*tasks)
 
-        return results
+        # Prepare detailed report for each test case
+        detailed_results = []
+        for i, result in enumerate(results):
+            test_case = test_cases[i]
+            detailed_results.append({
+                "test_case": {
+                    "input": test_case.input_data,
+                    "expected_output": test_case.expected_output
+                },
+                "result": result
+            })
+
+        return detailed_results

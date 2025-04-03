@@ -2,10 +2,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.exc import SQLAlchemyError
 from repositories.participant_submission_model import UserSubmission
-
+import datetime
 class UserSubmissionRepository:
     @staticmethod
-    async def add_or_update_submission(user_id: int, problem_id: int, challenge_id: int, code: str, status: str, total_test_cases: int, passed_test_cases: int, db: AsyncSession):
+    async def add_or_update_submission(user_id: int, problem_id: int, challenge_id: int, code: str, status: str, total_test_cases: int, passed_test_cases: int, evaluation_results , db: AsyncSession):
         try:
             # Check if a submission already exists
             result = await db.execute(
@@ -22,7 +22,8 @@ class UserSubmissionRepository:
                 submission.status = status
                 submission.total_test_cases = total_test_cases
                 submission.passed_test_cases = passed_test_cases
-                submission.submitted_at = func.now()
+                submission.evaluation_results = evaluation_results
+                submission.submitted_at = datetime.datetime.now()
             else:
                 # Add new submission
                 submission = UserSubmission(
@@ -32,7 +33,8 @@ class UserSubmissionRepository:
                     code=code,
                     status=status,
                     total_test_cases=total_test_cases,
-                    passed_test_cases=passed_test_cases
+                    passed_test_cases=passed_test_cases,
+                    evaluation_results=evaluation_results,
                 )
                 db.add(submission)
 
@@ -41,6 +43,14 @@ class UserSubmissionRepository:
         except SQLAlchemyError as e:
             await db.rollback()
             raise e
+
+
+    @staticmethod
+    async def get_submission_by_id(submission_id: int, db: AsyncSession):
+        result = await db.execute(
+            select(UserSubmission).where(UserSubmission.id == submission_id)
+        )
+        return result.scalar_one_or_none()
 
     @staticmethod
     async def get_submission_status(user_id: int, problem_id: int, db: AsyncSession):

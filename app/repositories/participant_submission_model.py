@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, ForeignKey, Text, Enum, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
+from sqlalchemy.dialects.postgresql import JSON
 from config.dbcon import Base
 import enum
 
@@ -20,6 +21,7 @@ class UserSubmission(Base):
     total_test_cases = Column(Integer, nullable=False)
     passed_test_cases = Column(Integer, nullable=False)
     submitted_at = Column(DateTime(timezone=True), server_default=func.now())
+    evaluation_results = Column(JSON, nullable=True)  # Updated to JSON column to store array of objects
 
     user = relationship("User", back_populates="submissions")
     problem = relationship("Problem", back_populates="submissions")

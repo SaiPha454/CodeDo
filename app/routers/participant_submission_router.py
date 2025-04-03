@@ -34,6 +34,26 @@ async def get_submission_form(request: Request, problem_id: int, challenge_id: i
         "sample_testcases": sample_testcases
     })
 
+
+@router.get("/{submission_id}/report")
+async def get_submission_report(request: Request, submission_id: int, db: AsyncSession = Depends(get_db)):
+    user = await AuthLogic.get_current_user(request, db)
+    if not user:
+        return RedirectResponse(url="/auth/login", status_code=302)
+    # Verify the user's role
+    if user.role != UserRole.participant:
+        raise HTTPException(status_code=403, detail="Forbidden")
+    
+    submission = await UserSubmissionService.get_submission_by_id(submission_id, db)
+    if not submission:
+        raise HTTPException(status_code=404, detail="Submission not found")
+    
+    return templates.TemplateResponse("participant/participant_submission_report.html", {
+        "request": request,
+        "submission": submission
+    })
+
+
 @router.post("/")
 async def submit_solution(
     request: Request,
@@ -53,21 +73,20 @@ async def submit_solution(
     evaluation_results = await CodeEvaluationService.evaluate_code(code, test_cases)
 
     # Calculate the number of passed test cases
-    passed_test_cases = sum(1 for result in evaluation_results if result["status"] == "Pass")
+    passed_test_cases = sum(1 for evaluation in evaluation_results if evaluation["result"]["status"] == "Pass")
     total_test_cases = len(test_cases)
     print("=========================================================")
     print(evaluation_results)
-    print(f"Total Test Cases: {total_test_cases}, Passed Test Cases: {passed_test_cases}")
+
     # Save the submission
-    # submission = await UserSubmissionService.submit_solution(
-    #     user_id=user_id,
-    #     problem_id=problem_id,
-    #     challenge_id=challenge_id,
-    #     code=code,
-    #     total_test_cases=total_test_cases,
-    #     passed_test_cases=passed_test_cases,
-    #     db=db
-    # )
-    return evaluation_results
-    # Redirect to the report page with submission_id
-    # return RedirectResponse(url=f"/participants/submissions/{submission.id}/report", status_code=302)
+    submission = await UserSubmissionService.submit_solution(
+        user_id=user_id,
+        problem_id=problem_id,
+        challenge_id=challenge_id,
+        code=code,
+        total_test_cases=total_test_cases,
+        passed_test_cases=passed_test_cases,
+        evaluation_results=evaluation_results,
+        db=db,
+    )
+    return {"message": "Submission successful", "submission_id": submission.id}
