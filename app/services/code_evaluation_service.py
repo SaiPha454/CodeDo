@@ -2,6 +2,7 @@ import sys
 import io
 import multiprocessing
 import asyncio
+import time  # Added to measure execution time
 
 def execute_code(user_code, input_data, expected_output, result_queue):
     # Redirect stdin and stdout
@@ -9,6 +10,8 @@ def execute_code(user_code, input_data, expected_output, result_queue):
     stdout_backup = sys.stdout
     sys.stdin = io.StringIO(input_data)
     sys.stdout = io.StringIO()
+
+    start_time = time.time()  # Start measuring time
 
     try:
         # Create a safe execution environment
@@ -28,10 +31,11 @@ def execute_code(user_code, input_data, expected_output, result_queue):
         output = sys.stdout.getvalue().strip()
 
         # Compare the output with the expected output
+        execution_time = round((time.time() - start_time) * 1000, 2)  # Calculate execution time in milliseconds and round to 2 decimal places
         if output == expected_output.strip():
-            result_queue.put({"status": "Pass", "output": output})
+            result_queue.put({"status": "Pass", "output": output, "execution_time": f"{execution_time} ms"})
         else:
-            result_queue.put({"status": "Fail", "output": output, "expected": expected_output})
+            result_queue.put({"status": "Fail", "output": output, "expected": expected_output, "execution_time": execution_time})
     except Exception as e:
         # Handle any other exceptions during execution
         result_queue.put({"status": "Error", "error": str(e)})
