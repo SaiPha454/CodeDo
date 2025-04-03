@@ -11,10 +11,12 @@
     <div class="container">
         <div class="header">
             <div class="header-left">
-                <span class="logo">CodeDo</span>
-                <span class="title">{{challenge.title}}</span>
+                <a class="logo" href="/participants/dashboard">CodeDo</a>
+                <a style="text-decoration: none;" class="title"
+                href="/participants/challenges/{{challenge.id}}">{{challenge.title}}</a>
             </div>
-            <button class="back-button">Back to Code</button>
+            <a class="back-button"
+            href="/participants/submissions/?problem_id={{problem.id}}&challenge_id={{challenge.id}}">Back to Code</a>
         </div>
 
         <div class="main-content">

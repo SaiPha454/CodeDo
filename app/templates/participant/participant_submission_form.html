@@ -17,8 +17,10 @@
     <div class="container">
         <header class="header">
             <div class="header-left">
-                <span class="logo">CodeDo</span>
-                <span class="title">{{challenge.title}}</span>
+                <a style="text-decoration: none;" class="logo"
+                href="/participants/dashboard">CodeDo</a>
+                <a class="title" style="text-decoration: none;"
+                href="/participants/challenges/{{challenge.id}}">{{challenge.title}}</a>
             </div>
             <button 
                 data-problem_id="{{problem.id}}"

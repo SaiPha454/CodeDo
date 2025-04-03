@@ -20,14 +20,12 @@ async def submit_code(event):
         "headers": headers,
         "body": json.dumps(payload)
     })
-    console.log(response)
     if response.ok:
         # Parse the response JSON
         data = await response.json()
         submission_id = data["submission_id"]
         console.log(submission_id)
-        # Redirect to the report page in a new tab
-        window.open(f"/participants/submissions/{submission_id}/report", "_blank")
+        window.location.href = f"/participants/submissions/{submission_id}/report"
     else:
         console.error("Failed to submit code")
 
