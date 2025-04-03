@@ -42,7 +42,7 @@ async def get_challenge_problems(request: Request, challenge_id: int, db: AsyncS
     RoleMiddleware.verify_role(request, UserRole.participant)
 
     # Fetch the challenge details
-    challenge = await ParticipantChallengeService.get_challenge_details(challenge_id, db)
+    challenge = await ParticipantChallengeService.get_challenge_details(user_id, challenge_id, db)
     if not challenge:
         raise HTTPException(status_code=404, detail="Challenge not found")
     print(challenge)

@@ -134,6 +134,18 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+.solve-button.primary-color {
+    background-color: #E35205; /* Primary color */
+}
+
+.solve-button.pass {
+    background-color: #2CBB5D; /* Green for pass */
+}
+
+.solve-button.fail {
+    background-color: #FF0000; /* Red for fail */
+}
+
 .solved-button {
     background-color: transparent;
     color: #fff;
@@ -148,6 +160,17 @@ body {
     align-items: center;
     justify-content: center;
     font-family: 'Inter', sans-serif;
+}
+
+.pass-pb-btn {
+    background-color: transparent;
+    border: 1px solid #2CBB5D; /* Green for pass */
+    color: #2CBB5D;
+}
+.fail-pb-btn {
+    background-color: transparent;
+    border: 1px solid #FF0000; /* Red for fail */
+    color: #FF0000;
 }
 
 .site-footer {
