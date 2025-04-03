@@ -1,2 +1,147 @@
-<h1>Report</h1>
-<p>{{submission}}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results</title>
+    <link rel="stylesheet" href="/static/css/participant/participant_submission_report.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <span class="logo">CodeDo</span>
+                <span class="title">ADA Test 2025 - Midterm</span>
+            </div>
+            <button class="back-button">Back to Code</button>
+        </div>
+
+        <div class="main-content">
+            <div class="results-container">
+                <div class="results-header">
+                    <h1>Test Results: Add Two Numbers</h1>
+                    <div class="status-indicators">
+                        <div class="status-item">
+                            <div class="status-dot pass"></div>
+                            <span>Pass</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-dot fail"></div>
+                            <span>Fail</span>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-dot error"></div>
+                            <span>Error</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="test-cases">
+                    <!-- Test Case 1 -->
+                    <div class="test-case">
+                        <div class="test-case-header">
+                            <div class="test-case-title">
+                                <span>Test Case #1</span>
+                                <div class="status-dot pass"></div>
+                            </div>
+                            <span class="execution-time">0.023s</span>
+                        </div>
+                        <div class="test-case-details">
+                            <div class="detail-box">
+                                <span class="detail-label">Input</span>
+                                <span class="detail-value">a=5, b=4</span>
+                            </div>
+                            <div class="detail-box">
+                                <span class="detail-label">Expected Output</span>
+                                <span class="detail-value">29</span>
+                            </div>
+                            <div class="detail-box">
+                                <span class="detail-label">Actual Output</span>
+                                <span class="detail-value">29</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Test Case 2 -->
+                    <div class="test-case">
+                        <div class="test-case-header">
+                            <div class="test-case-title">
+                                <span>Test Case #2</span>
+                                <div class="status-dot pass"></div>
+                            </div>
+                            <span class="execution-time">0.021s</span>
+                        </div>
+                        <div class="test-case-details">
+                            <div class="detail-box">
+                                <span class="detail-label">Input</span>
+                                <span class="detail-value">a=10, b=20</span>
+                            </div>
+                            <div class="detail-box">
+                                <span class="detail-label">Expected Output</span>
+                                <span class="detail-value">230</span>
+                            </div>
+                            <div class="detail-box">
+                                <span class="detail-label">Actual Output</span>
+                                <span class="detail-value">230</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Test Case 3 -->
+                    <div class="test-case">
+                        <div class="test-case-header">
+                            <div class="test-case-title">
+                                <span>Test Case #3</span>
+                                <div class="status-dot fail"></div>
+                            </div>
+                            <span class="execution-time">0.025s</span>
+                        </div>
+                        <div class="test-case-details">
+                            <div class="detail-box">
+                                <span class="detail-label">Input</span>
+                                <span class="detail-value">a=0, b=5</span>
+                            </div>
+                            <div class="detail-box">
+                                <span class="detail-label">Expected Output</span>
+                                <span class="detail-value">5</span>
+                            </div>
+                            <div class="detail-box">
+                                <span class="detail-label">Actual Output</span>
+                                <span class="detail-value">6</span>
+                            </div>
+                        </div>
+                        <div class="error-message">Expected 5 but got 6</div>
+                    </div>
+
+                    <!-- Test Case 4 -->
+                    <div class="test-case">
+                        <div class="test-case-header">
+                            <div class="test-case-title">
+                                <span>Test Case #4</span>
+                                <div class="status-dot error"></div>
+                            </div>
+                            <span class="execution-time">0.020s</span>
+                        </div>
+                        <div class="test-case-details">
+                            <div class="detail-box">
+                                <span class="detail-label">Input</span>
+                                <span class="detail-value">a=999, b=1</span>
+                            </div>
+                            <div class="detail-box">
+                                <span class="detail-label">Expected Output</span>
+                                <span class="detail-value">1999</span>
+                            </div>
+                            <div class="detail-box">
+                                <span class="detail-label">Actual Output</span>
+                                <span class="detail-value"></span>
+                            </div>
+                        </div>
+                        <div class="error-message">Runtime Error: Integer overflow</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
