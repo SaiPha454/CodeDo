@@ -50,9 +50,13 @@ async def get_submission_report(request: Request, submission_id: int, db: AsyncS
     if not submission:
         raise HTTPException(status_code=404, detail="Submission not found")
     
+    problem = await ParticipantProblemService.get_problem_by_id(submission.problem_id, db)
+    challenge = await ParticipantChallengeService.get_challenge_by_id(submission.challenge_id, db)
     return templates.TemplateResponse("participant/participant_submission_report.html", {
         "request": request,
-        "submission": submission
+        "submission": submission,
+        "problem": problem,
+        "challenge": challenge,
     })
 
 

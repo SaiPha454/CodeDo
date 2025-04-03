@@ -30,18 +30,7 @@ class UserSubmissionService:
         submission = await ParticipantSubmissionRepository.get_submission_by_id(submission_id, db)
         if not submission:
             raise HTTPException(status_code=404, detail="Submission not found")
-        return {
-            "submission_id": submission.id,
-            "user_id": submission.user_id,
-            "problem_id": submission.problem_id,
-            "challenge_id": submission.challenge_id,
-            "code": submission.code,
-            "status": submission.status,
-            "total_test_cases": submission.total_test_cases,
-            "passed_test_cases": submission.passed_test_cases,
-            "evaluation_results": submission.evaluation_results
-        }
-
+        return submission
     @staticmethod
     async def get_problem_status(user_id: int, problem_id: int, db: AsyncSession) -> Dict:
         submission = await ParticipantSubmissionRepository.get_submission_status(user_id, problem_id, db)

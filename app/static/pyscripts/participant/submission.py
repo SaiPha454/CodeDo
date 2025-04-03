@@ -20,7 +20,7 @@ async def submit_code(event):
         "headers": headers,
         "body": json.dumps(payload)
     })
-    
+    console.log(response)
     if response.ok:
         # Parse the response JSON
         data = await response.json()
