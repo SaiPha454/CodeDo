@@ -5,7 +5,9 @@ async def submit_code(event):
     problem_id = event.currentTarget.getAttribute("data-problem_id")
     challenge_id = event.currentTarget.getAttribute("data-challenge_id")
     code_str = window.editor.getValue()
-
+    submit_button = event.currentTarget
+    submit_button.disabled = True
+    submit_button.textContent = "Submitting..."
     # Prepare the payload
     payload = {
         "problem_id": problem_id,
@@ -20,6 +22,9 @@ async def submit_code(event):
         "headers": headers,
         "body": json.dumps(payload)
     })
+
+    submit_button.disabled = False
+    submit_button.textContent = "Submit"
     if response.ok:
         # Parse the response JSON
         data = await response.json()
