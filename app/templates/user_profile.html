@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeDo - User Profile</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.3.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2025.3.1/core.js"></script>
+    <link rel="stylesheet" href="/static/css/user_profile.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+</head>
+<body>
+    <body>
+        {% include "header.html" %}
+    
+        <div class="main-content">
+            <div class="page-title">Profile Settings</div>
+            <div class="profile-card">
+                <div class="profile-content">
+                    <div class="profile-avatar">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5ZM12 19.2C9.5 19.2 7.29 17.92 6 15.98C6.03 13.99 10 12.9 12 12.9C13.99 12.9 17.97 13.99 18 15.98C16.71 17.92 14.5 19.2 12 19.2Z" fill="#FFFFFF"/>
+                        </svg>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-group">
+                            <div class="detail-label">Full Name</div>
+                            <div class="detail-value" id="nameContainer">
+                                <span id="nameDisplay">{{user.username}}</span>
+                                <button class="edit-icon" id="editNameBtn" mpy-click="start_editing">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M11.1716 1.99777L9.83827 3.3311H3.33333V12.6645H12.6667V6.1595L14 4.82617V13.3311C14 13.6993 13.7015 13.9978 13.3333 13.9978H2.66667C2.29848 13.9978 2 13.6993 2 13.3311V2.66444C2 2.29624 2.29848 1.99777 2.66667 1.99777H11.1716ZM13.6569 1.39844L14.5997 2.34124L8.4714 8.46953H7.5286V7.52673L13.6569 1.39844Z" fill="#E35205"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="edit-controls" id="editControls" style="display: none;">
+                                <input type="text" class="edit-input" id="nameInput">
+                                <button class="save-button" id="saveNameBtn" mpy-click="save_changes">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M13.7071 4.29289C14.0976 4.68342 14.0976 5.31658 13.7071 5.70711L7.70711 11.7071C7.31658 12.0976 6.68342 12.0976 6.29289 11.7071L2.29289 7.70711C1.90237 7.31658 1.90237 6.68342 2.29289 6.29289C2.68342 5.90237 3.31658 5.90237 3.70711 6.29289L7 9.58579L12.2929 4.29289C12.6834 3.90237 13.3166 3.90237 13.7071 4.29289Z" fill="#E35205"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="detail-group">
+                            <div class="detail-label">Email</div>
+                            <div class="detail-value">{{user.email}}</div>
+                        </div>
+                        <div class="detail-group">
+                            <div class="detail-label">Role</div>
+                            <div class="detail-value">{{user.role}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="logout-container">
+                <a class="logout-button" href="/auth/logout" style="text-decoration: none;">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M12 12L15 8M15 8L12 4M15 8H5M9 15H4C3.46957 15 2.96086 14.7893 2.58579 14.4142C2.21071 14.0391 2 13.5304 2 13V3C2 2.46957 2.21071 1.96086 2.58579 1.58579C2.96086 1.21071 3.46957 1 4 1H9" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Logout
+                </a>
+            </div>
+        </div>
+    
+        {% include "footer.html" %}
+
+        <script type="mpy" src="/static/pyscripts/user.py"></script>
+</body>
+</html>

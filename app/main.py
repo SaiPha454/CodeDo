@@ -15,6 +15,7 @@ from routers import participant_router
 from routers import participant_challenge_router
 from routers import participant_join_challenge_router
 from routers import participant_submission_router
+from routers import user_router
 
 templates = Jinja2Templates(directory="templates")
 
@@ -27,6 +28,7 @@ app.add_middleware(SessionMiddleware, secret_key="your_secret_key")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Include routers
+app.include_router(user_router.router)
 app.include_router(auth_router.router)
 app.include_router(questioner_router.router)
 app.include_router(questioner_challenge_router.router)

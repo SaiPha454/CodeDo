@@ -1,0 +1,343 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    background: #1A1A1A;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.header {
+    width: 100%;
+    height: 108px;
+    border: 1px solid rgba(255,255,255,0.10);
+    background: #2A2A2A;
+    display: flex;
+    align-items: center;
+    padding: 0 88px;
+    justify-content: space-between;
+}
+
+.logo {
+    color: #E35205;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.profile-icon {
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 88px;
+    gap: 32px;
+}
+
+.page-title {
+    color: white;
+    font-size: 24px;
+}
+
+.profile-card {
+    background: #2A2A2A;
+    border-radius: 9px;
+    padding: 32px;
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    width: 100%;
+}
+
+.profile-content {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+}
+
+.profile-avatar {
+    min-width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.profile-avatar svg {
+    width: 80px;
+    height: 80px;
+}
+
+.profile-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+
+.detail-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detail-label {
+    color: #808080;
+    font-size: 14px;
+}
+
+.detail-value {
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    word-break: break-word;
+}
+
+.edit-icon {
+    color: #E35205;
+    cursor: pointer;
+    flex-shrink: 0;
+    background-color: #2a2a2a;
+    border: none;
+}
+
+.logout-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
+
+.logout-button {
+    background: #333;
+    color: #808080;
+    padding: 12px 24px;
+    border-radius: 15px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.footer {
+    width: 100%;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: auto;
+}
+
+.footer-content {
+    padding: 24px 88px;
+    color: white;
+    font-size: 14px;
+}
+
+/* Large screens (max-width: 1200px) */
+@media screen and (max-width: 1200px) {
+    .header {
+        padding: 0 40px;
+    }
+
+    .main-content {
+        padding: 32px 40px;
+    }
+
+    .footer-content {
+        padding: 24px 40px;
+    }
+}
+
+/* Tablet screens (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 0 24px;
+        height: 80px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .main-content {
+        padding: 24px;
+        gap: 24px;
+    }
+
+    .profile-card {
+        padding: 24px;
+    }
+
+    .profile-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-avatar {
+        min-width: 120px;
+        height: 120px;
+    }
+
+    .profile-avatar svg {
+        width: 60px;
+        height: 60px;
+    }
+
+    .detail-value {
+        justify-content: center;
+    }
+
+    .footer-content {
+        padding: 20px 24px;
+        text-align: center;
+    }
+}
+
+/* Mobile screens (max-width: 480px) */
+@media screen and (max-width: 480px) {
+    .header {
+        padding: 0 16px;
+        height: 64px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .profile-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .profile-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .main-content {
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .page-title {
+        font-size: 20px;
+    }
+
+    .profile-card {
+        padding: 16px;
+    }
+
+    .profile-avatar {
+        min-width: 100px;
+        height: 100px;
+    }
+
+    .profile-avatar svg {
+        width: 50px;
+        height: 50px;
+    }
+
+    .detail-label {
+        font-size: 12px;
+    }
+
+    .detail-value {
+        font-size: 16px;
+    }
+
+    .logout-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .footer-content {
+        padding: 16px;
+        font-size: 12px;
+    }
+}
+
+/* Handle very small screens */
+@media screen and (max-width: 320px) {
+    .profile-card {
+        padding: 12px;
+    }
+
+    .profile-content {
+        gap: 16px;
+    }
+
+    .profile-avatar {
+        min-width: 80px;
+        height: 80px;
+    }
+
+    .profile-avatar svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .detail-value {
+        font-size: 14px;
+    }
+
+    .logout-button {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+}
+
+
+.edit-input {
+    background: #333;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 8px;
+    color: white;
+    font-size: 18px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.save-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.edit-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Make sure the edit controls stay aligned on mobile */
+@media screen and (max-width: 768px) {
+    .edit-controls {
+        justify-content: center;
+    }
+    
+    .edit-input {
+        max-width: 200px;
+    }
+}

@@ -33,3 +33,20 @@ class UserRepository:
     async def get_user_by_id(user_id: int, db: AsyncSession):
         result = await db.execute(select(User).where(User.id == user_id))
         return result.scalar_one_or_none()
+    
+    @staticmethod
+    async def update_user_name(user_id: int, new_username: str, db: AsyncSession):
+        print("==================================>", user_id, new_username)
+        try:
+            user = await db.execute(
+                select(User).where(User.id == user_id)
+            )
+            user = user.scalar_one_or_none()
+            if not user:
+                raise HTTPException(status_code=404, detail="User not found")
+            user.username = new_username
+            await db.commit()
+            return user
+        except SQLAlchemyError:
+            await db.rollback()
+            raise HTTPException(status_code=500, detail="Update failed. Please try again.")

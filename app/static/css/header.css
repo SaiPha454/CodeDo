@@ -21,6 +21,16 @@
     border-radius: 50%;
   }
   
+  .profile-icon {
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
   @media (max-width: 991px) {
     .site-header {
       padding-left: 40px;
