@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - CodeDo</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.3.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2025.3.1/core.js"></script>
+
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/questioner/participant_submission.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+
+
+    <div class="app-container">
+        {% include "header.html" %}
+
+      
+        <main class="main-content">
+            <div class="page-header">
+              <div class="breadcrumb">
+                <a href="/questioners/challenges/{{challenge.id}}" class="challenge-name">{{challenge.title}}</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="/challenges/participants" class="challenge-name">Participants</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">{{participant.username}}</span>
+              </div>
+            </div>
+        
+            <div class="submissions-container">
+              <div class="participant-info-header">
+                <img src="https://placehold.co/64x64" alt="John Smith" class="participant-avatar-large" />
+                <div class="participant-details">
+                  <h2 class="participant-name-large">{{participant.username}}</h2>
+                  <p class="participant-id">Student ID: {{participant.email}}</p>
+                </div>
+              </div>
+        
+              <div class="table-container">
+                <table class="submissions-table">
+                  <thead>
+                    <tr>
+                      <th>Problem Name</th>
+                      <th>Submitted At</th>
+                      <th>Language</th>
+                      <th>Status</th>
+                      <th>Test Cases</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {% for submission in submissions %}
+                    <tr>
+                      <td>
+                        <div class="problem-name">{{ submission.problem_title }}</div>
+                      </td>
+                      <td>{{ submission.submitted_at }}</td>
+                      <td>{{ submission.language }}</td>
+                      <td>
+                        {% if submission.status == 'Pass' %}
+                          <span class="status-badge status-passed">Submitted/Pass</span>
+                        {% else %}
+                          <span class="status-badge status-failed">Submitted/Fail</span>
+                        {% endif %}
+                      </td>
+                      <td>{{ submission.passed_test_cases }}/{{ submission.total_test_cases }}</td>
+                      <td>
+                        <a href="/submissions/{{ submission.id }}/details" class="view-details-button">
+                          <svg class="dot-icon" viewBox="0 0 16 16">
+                            <circle cx="8" cy="8" r="4"/>
+                          </svg>
+                          View Details
+                        </a>
+                      </td>
+
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </main>
+        {% include "footer.html" %}
+  </body>
+</html>

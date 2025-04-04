@@ -5,6 +5,9 @@ from sqlalchemy import delete
 from repositories.challenge_model import Challenge
 from repositories.problem_model import Problem
 from repositories.challenge_repository import ChallengeRepository
+from repositories.participant_challenge_model import ParticipantChallenge
+from repositories.user_model import User
+
 class QuestionerChallengeRepository(ChallengeRepository):
     # @staticmethod
     # async def get_challenges_by_user(user_id: int, db: AsyncSession):
@@ -40,3 +43,10 @@ class QuestionerChallengeRepository(ChallengeRepository):
         await db.delete(challenge)
         await db.commit()
         return challenge
+
+    @staticmethod
+    async def get_participants_by_challenge(challenge_id: int, db: AsyncSession):
+        result = await db.execute(
+            select(User).join(ParticipantChallenge).where(ParticipantChallenge.challenge_id == challenge_id)
+        )
+        return result.scalars().all()

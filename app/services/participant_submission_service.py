@@ -3,7 +3,7 @@ from repositories.participant_submission_repository import ParticipantSubmission
 from typing import List, Dict
 from repositories.participant_submission_model import SubmissionStatus
 from fastapi import HTTPException
-
+from services.questioner_problem_service import QuestionerProblemService
 
 class UserSubmissionService:
     @staticmethod
@@ -55,3 +55,9 @@ class UserSubmissionService:
             }
             for submission in submissions
         ]
+    
+    @staticmethod
+    async def get_submissions_by_challenge_and_participant(participant_id: int, challenge_id: int, db: AsyncSession) -> List[Dict]:
+        submissions = await ParticipantSubmissionRepository.get_submissions_by_challenge(participant_id, challenge_id, db)
+        return submissions
+        
