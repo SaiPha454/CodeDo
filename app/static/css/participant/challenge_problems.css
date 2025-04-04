@@ -135,7 +135,7 @@ body {
 }
 
 .solve-button.primary-color {
-    background-color: #E35205; /* Primary color */
+    background-color: #2CBB5D; /* Primary color */
 }
 
 .solve-button.pass {
@@ -165,12 +165,12 @@ body {
 .pass-pb-btn {
     background-color: transparent;
     border: 1px solid #2CBB5D; /* Green for pass */
-    color: #2CBB5D;
+    /* color: #2CBB5D; */
 }
 .fail-pb-btn {
     background-color: transparent;
     border: 1px solid #FF0000; /* Red for fail */
-    color: #FF0000;
+    /* color: #FF0000; */
 }
 
 .site-footer {

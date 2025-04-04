@@ -8,13 +8,12 @@
     <script type="module" src="https://pyscript.net/releases/2025.3.1/core.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/questioner/submission_details.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <div class="logo">CodeDo</div>
-            <img src="https://placehold.co/41x41" class="profile-img" alt="Profile"/>
-        </header>
+        {% include "header.html" %}
 
         <main class="main-content">
             <div class="breadcrumb">
@@ -30,14 +29,16 @@
 
             <div class="submission-card">
                 <div class="submission-header">
-                    <img src="https://placehold.co/64x64" class="student-img" alt="Student"/>
+                    <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20.5" cy="20.5" r="20" fill="#333333" stroke="#E35205"/>
+                        <path d="M20.5 20.5C22.71 20.5 24.5 18.71 24.5 16.5C24.5 14.29 22.71 12.5 20.5 12.5C18.29 12.5 16.5 14.29 16.5 16.5C16.5 18.71 18.29 20.5 20.5 20.5ZM20.5 22.5C17.83 22.5 12.5 23.84 12.5 26.5V28.5H28.5V26.5C28.5 23.84 23.17 22.5 20.5 22.5Z" fill="#E35205"/>
+                      </svg>
                     <div>
                         <div class="problem-title">{{ problem.title }}</div>
-                        <div class="submission-info">Submitted by {{ participant.username }} (ID: {{ participant.id }}) on {{ submission.submitted_at }}</div>
+                        <div class="submission-info">Submitted by {{ participant.username }} : {{ participant.email }} on {{ submission.submitted_at }}</div>
                     </div>
                     <div class="status-container">
-                        <div class="status-badge">{{ submission.status }}</div>
-                        <div class="test-count">{{ submission.passed_test_cases }}/{{ submission.total_test_cases }} Test Cases</div>
+                        <div class="test-count">Pass {{ submission.passed_test_cases }}/{{ submission.total_test_cases }} Test Cases</div>
                     </div>
                 </div>
 
@@ -76,9 +77,7 @@
                 </div>
             </div>
         </main>
-        <footer class="footer">
-            Copyright © 2025 CodeDo Contact US codedo42@gmail.com | Terms & Policy
-        </footer>
+        {% include "footer.html" %}
     </div>
     <script type="mpy" src="/static/pyscripts/questioner/submission_details.py"></script>
 </body>
