@@ -4,6 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from services.questioner_challenge_service import QuestionerChallengeService
 from config.dbcon import get_db
 from routers import questioner_problem_router
+from routers import questioner_challenge_participant_router
 
 
 templates = Jinja2Templates(directory="templates")
@@ -41,3 +42,4 @@ async def delete_challenge(id: int, request: Request, db: AsyncSession = Depends
 
 
 router.include_router(questioner_problem_router.router, prefix="/{challenge_id}/problems", tags=["problems"])
+router.include_router(questioner_challenge_participant_router.router, prefix="/{challenge_id}/participants", tags=["participants"])

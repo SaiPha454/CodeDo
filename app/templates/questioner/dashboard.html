@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -14,8 +14,7 @@
     <link rel="stylesheet" href="/static/css/footer.css" />
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
-
-</head>
+  </head>
   <body>
     <div class="app-container">
       {% include "header.html" %}
@@ -44,14 +43,19 @@
               <span class="challenge-date">Created: <span>{{ challenge.created_at }}</span></span>
             </div>
             <div class="challenge-actions">
+              <a class="action-button view-participants-button" style="text-decoration: none;" href="/questioners/challenges/{{ challenge.id }}/participants">
+                <svg xmlns="http://www.w3.org/2000/svg" class="action-icon" viewBox="0 0 24 24">
+                  <path d="M2 22C2 17.5817 5.58172 14 10 14C14.4183 14 18 17.5817 18 22H16C16 18.6863 13.3137 16 10 16C6.68629 16 4 18.6863 4 22H2ZM10 13C6.685 13 4 10.315 4 7C4 3.685 6.685 1 10 1C13.315 1 16 3.685 16 7C16 10.315 13.315 13 10 13ZM10 11C12.21 11 14 9.21 14 7C14 4.79 12.21 3 10 3C7.79 3 6 4.79 6 7C6 9.21 7.79 11 10 11ZM18.2837 14.7028C21.0644 15.9561 23 18.752 23 22H21C21 19.564 19.5483 17.4671 17.4628 16.5271L18.2837 14.7028ZM17.5962 3.41321C19.5944 4.23703 21 6.20361 21 8.5C21 11.3702 18.8042 13.7252 16 13.9776V11.9646C17.6967 11.7222 19 10.264 19 8.5C19 7.0875 18.1737 5.86248 16.9721 5.29294L17.5962 3.41321Z"/>
+                </svg>
+                <span>View Participants</span>
+              </a>
               <a class="action-button" href="/questioners/challenges/{{ challenge.id }}/problems">
                 <svg xmlns="http://www.w3.org/2000/svg" class="action-icon" viewBox="0 0 24 24">
                   <path d="M16.7574 2.99666L14.7574 4.99666H5V18.9967H19V9.23926L21 7.23926V19.9967C21 20.5489 20.5523 20.9967 20 20.9967H4C3.44772 20.9967 3 20.5489 3 19.9967V3.99666C3 3.44437 3.44772 2.99666 4 2.99666H16.7574ZM20.4853 2.09766L21.8995 3.51187L12.7071 12.7043L11.2929 12.7043L11.2929 11.2901L20.4853 2.09766Z"/>
                 </svg>
-            </a>
-              <button data-challenge-id="{{ challenge.id }}" class="action-button" mpy-click="show_delete_challenge_modal">
-                <!-- delete-challenge-submit-button -->
-                <svg  xmlns="http://www.w3.org/2000/svg" class="action-icon" viewBox="0 0 24 24">
+              </a>
+              <button class="action-button" mpy-click="show_delete_challenge_modal" data-challenge-id="{{ challenge.id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="action-icon" viewBox="0 0 24 24">
                   <path d="M12 10.5858L16.2426 6.34317L17.6568 7.75738L13.4142 12L17.6568 16.2426L16.2426 17.6568L12 13.4142L7.75736 17.6568L6.34315 16.2426L10.5858 12L6.34315 7.75738L7.75736 6.34317L12 10.5858Z"/>
                 </svg>
               </button>
@@ -61,16 +65,11 @@
         </div>
       </main>
 
-      
-
-      <!-- Modal -->
-        {% include "questioner/create_challenge_modal.html" %}
-      <!-- Delete Modal -->
+      {% include "questioner/create_challenge_modal.html" %}
       {% include "questioner/delete_challenge_modal.html" %}
       {% include "footer.html" %}
     </div>
 
-    
     <script type="mpy" src="/static/pyscripts/questioner/modal.py"></script>
     <script type="mpy" src="/static/pyscripts/questioner/challenge.py"></script>
   </body>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - CodeDo</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.3.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2025.3.1/core.js"></script>
+
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/questioner/challenge_participants.css" />
+    <link rel="stylesheet" href="/static/css/questioner/create_challenge_modal.css" />
+    <link rel="stylesheet" href="/static/css/questioner/delete_challenge_modal.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+
+
+    <div class="app-container">
+        {% include "header.html" %}
+      
+        <main class="main-content">
+          <div class="page-header">
+            <div class="breadcrumb">
+              <a href="/questioners/challenges" class="challenge-name">ADA Test 2025 - Midterm</a>
+              <span class="breadcrumb-separator">/</span>
+              <span class="breadcrumb-current">Participants</span>
+            </div>
+            <div class="total-participants">
+              <span class="total-label">Total Participants:</span>
+              <span class="total-count">4</span>
+            </div>
+          </div>
+      
+          <div class="participants-table-container">
+            <table class="participants-table">
+              <thead>
+                <tr>
+                  <th>Participant</th>
+                  <th>Student ID</th>
+                  <th>Last Submitted</th>
+                  <th>Submissions</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="participant-info">
+                      <img src="https://placehold.co/32x32" alt="John Smith" class="participant-avatar">
+                      <span class="participant-name">John Smith</span>
+                    </div>
+                  </td>
+                  <td>ST102534</td>
+                  <td>2025-03-15 14:30</td>
+                  <td>
+                    <div class="submissions-info">
+                      <span class="submissions-count">3/5</span>
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width: 60%"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <a href="/questioners/challenges/participants/1/submissions" class="view-submissions-button">
+                      <svg class="dot-icon" viewBox="0 0 16 16">
+                        <circle cx="8" cy="8" r="4"/>
+                      </svg>
+                      View Submissions
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="participant-info">
+                      <img src="https://placehold.co/32x32" alt="Sarah Johnson" class="participant-avatar">
+                      <span class="participant-name">Sarah Johnson</span>
+                    </div>
+                  </td>
+                  <td>ST102642</td>
+                  <td>2025-03-15 15:45</td>
+                  <td>
+                    <div class="submissions-info">
+                      <span class="submissions-count">4/5</span>
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80%"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <a href="/questioners/challenges/participants/2/submissions" class="view-submissions-button">
+                      <svg class="dot-icon" viewBox="0 0 16 16">
+                        <circle cx="8" cy="8" r="4"/>
+                      </svg>
+                      View Submissions
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="participant-info">
+                      <img src="https://placehold.co/32x32" alt="Michael Brown" class="participant-avatar">
+                      <span class="participant-name">Michael Brown</span>
+                    </div>
+                  </td>
+                  <td>ST102789</td>
+                  <td>2025-03-14 09:15</td>
+                  <td>
+                    <div class="submissions-info">
+                      <span class="submissions-count">2/5</span>
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width: 40%"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <a href="/questioners/challenges/participants/3/submissions" class="view-submissions-button">
+                      <svg class="dot-icon" viewBox="0 0 16 16">
+                        <circle cx="8" cy="8" r="4"/>
+                      </svg>
+                      View Submissions
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="participant-info">
+                      <img src="https://placehold.co/32x32" alt="Emily Davis" class="participant-avatar">
+                      <span class="participant-name">Emily Davis</span>
+                    </div>
+                  </td>
+                  <td>ST102901</td>
+                  <td>2025-03-14 11:20</td>
+                  <td>
+                    <div class="submissions-info">
+                      <span class="submissions-count">5/5</span>
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <a href="/questioners/challenges/participants/4/submissions" class="view-submissions-button">
+                      <svg class="dot-icon" viewBox="0 0 16 16">
+                        <circle cx="8" cy="8" r="4"/>
+                      </svg>
+                      View Submissions
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+        {% include "footer.html" %}
+
+    <script type="mpy" src="/static/pyscripts/questioner/modal.py"></script>
+    <script type="mpy" src="/static/pyscripts/questioner/challenge.py"></script>
+  </body>
+</html>
