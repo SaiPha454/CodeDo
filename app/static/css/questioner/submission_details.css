@@ -398,3 +398,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--text-gray);
 }
+.crump-back {
+    text-decoration: none;
+    color: var(--primary-color);
+}

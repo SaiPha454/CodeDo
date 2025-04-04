@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeDo - Submission Details</title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.3.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2025.3.1/core.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/questioner/submission_details.css">
 </head>
@@ -16,57 +18,36 @@
 
         <main class="main-content">
             <div class="breadcrumb">
-                <span>ADA Test 2025 - Midterm</span>
+                <a class="crump-back"
+                href="/questioners/dashboard">{{ challenge.title }}</a>
                 <span class="separator">/</span>
-                <span>Participants</span>
+                <a class="crump-back" href="/questioners/challenges/{{challenge.id}}/participants">Participants</a>
                 <span class="separator">/</span>
-                <span class="current">Problem 1 Submission Details</span>
+                <a class="crump-back" href="/questioners/challenges/{{challenge.id}}/participants/{{participant.id}}/submissions">Submissions</a>
+                <span class="separator">/</span>
+                <span class="current">Submission Details</span>
             </div>
 
             <div class="submission-card">
                 <div class="submission-header">
                     <img src="https://placehold.co/64x64" class="student-img" alt="Student"/>
                     <div>
-                        <div class="problem-title">Problem 1: Implementing an Advanced Binary Search Tree with Self-Balancing Mechanism</div>
-                        <div class="submission-info">Submitted by John Smith (ST102534) on 2025-03-15 14:30</div>
+                        <div class="problem-title">{{ problem.title }}</div>
+                        <div class="submission-info">Submitted by {{ participant.username }} (ID: {{ participant.id }}) on {{ submission.submitted_at }}</div>
                     </div>
                     <div class="status-container">
-                        <div class="status-badge">Passed</div>
-                        <div class="test-count">10/10 Test Cases</div>
+                        <div class="status-badge">{{ submission.status }}</div>
+                        <div class="test-count">{{ submission.passed_test_cases }}/{{ submission.total_test_cases }} Test Cases</div>
                     </div>
                 </div>
 
                 <div class="tabs">
-                    <button class="tab active" id="codeTab">Code</button>
-                    <button class="tab" id="testTab">Test Cases</button>
+                    <button class="tab active" id="codeTab" mpy-click="activate_code_tab">Code</button>
+                    <button class="tab" id="testTab" mpy-click="activate_test_tab">Test Cases</button>
                 </div>
 
                 <div class="code-content" id="codeContent">
-                    <pre class="code-block">class Node:
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
-        self.height = 1
-
-def getHeight(node):
-    if not node:
-        return 0
-    return node.height
-
-def getBalance(node):
-    if not node:
-        return 0
-    return getHeight(node.left) - getHeight(node.right)
-
-def rightRotate(y):
-    x = y.left
-    T2 = x.right
-    x.right = y
-    y.left = T2
-    y.height = max(getHeight(y.left), getHeight(y.right)) + 1
-    x.height = max(getHeight(x.left), getHeight(x.right)) + 1
-    return x</pre>
+                    <pre class="code-block">{{ submission.code }}</pre>
                 </div>
 
                 <div class="test-cases" id="testContent">
@@ -78,60 +59,27 @@ def rightRotate(y):
                         <div>Status</div>
                         <div>Message</div>
                     </div>
+                    {% for result in submission.evaluation_results %}
                     <div class="test-grid test-case">
-                        <div>arr = [3,1,4,1,5,9,2,6,5,3]</div>
-                        <div>Balanced BST with height 4</div>
-                        <div>Balanced BST with height 4</div>
-                        <div class="time">0.023s</div>
-                        <div><span class="test-status passed">passed</span></div>
-                        <div class="test-message"></div>
+                        <div>
+                            <pre>{{ result.test_case.input }}</pre>
+                        </div>
+                        <div>
+                            <pre>{{ result.test_case.expected_output }}</pre>
+                        </div>
+                        <div>{{ result.result.output }}</div>
+                        <div class="time">{{ result.result.execution_time }} ms</div>
+                        <div><span class="test-status {{ result.result.status | lower }}">{{ result.result.status }}</span></div>
+                        <div class="test-message">{{ result.result.error or '' }}</div>
                     </div>
-                    <div class="test-grid test-case">
-                        <div>arr = [1,2,3,4,5,6,7,8,9,10]</div>
-                        <div>Balanced BST with height 4</div>
-                        <div>Balanced BST with height 3</div>
-                        <div class="time">0.021s</div>
-                        <div><span class="test-status failed">failed</span></div>
-                        <div class="test-message">Height mismatch: Expected 4 but got 3</div>
-                    </div>
-                    <div class="test-grid test-case">
-                        <div>arr = []</div>
-                        <div>Empty BST</div>
-                        <div></div>
-                        <div class="time">-</div>
-                        <div><span class="test-status error">error</span></div>
-                        <div class="test-message">NullPointerException at line 24: Cannot access property of null object</div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </main>
-
         <footer class="footer">
             Copyright © 2025 CodeDo Contact US codedo42@gmail.com | Terms & Policy
         </footer>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const codeTab = document.getElementById('codeTab');
-            const testTab = document.getElementById('testTab');
-            const codeContent = document.getElementById('codeContent');
-            const testContent = document.getElementById('testContent');
-            
-            codeTab.addEventListener('click', function() {
-                codeTab.classList.add('active');
-                testTab.classList.remove('active');
-                codeContent.style.display = 'block';
-                testContent.style.display = 'none';
-            });
-            
-            testTab.addEventListener('click', function() {
-                testTab.classList.add('active');
-                codeTab.classList.remove('active');
-                testContent.style.display = 'block';
-                codeContent.style.display = 'none';
-            });
-        });
-    </script>
+    <script type="mpy" src="/static/pyscripts/questioner/submission_details.py"></script>
 </body>
 </html>

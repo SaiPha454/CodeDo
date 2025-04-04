@@ -28,7 +28,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Include routers
 app.include_router(auth_router.router)
-# app.include_router(questioner_router.router)
+app.include_router(questioner_router.router)
 app.include_router(questioner_challenge_router.router)
 app.include_router(participant_router.router)
 app.include_router(participant_challenge_router.router)

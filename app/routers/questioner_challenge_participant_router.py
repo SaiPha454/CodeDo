@@ -7,6 +7,8 @@ from services.questioner_challenge_participant_service import QuestionerChalleng
 from services.questioner_challenge_service import QuestionerChallengeService
 from services.user_service import UserService
 from services.participant_submission_service import UserSubmissionService
+from services.questioner_problem_service import QuestionerProblemService
+
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
@@ -30,5 +32,11 @@ async def get_submission_details(request: Request, participant_id: int, submissi
     submission = await UserSubmissionService.get_submission_by_id(submission_id, db)
     challenge = await QuestionerChallengeService.get_challenge(challenge_id, db)
     participant = await UserService.get_user_by_id(participant_id, db)
-    
-    return templates.TemplateResponse("questioner/submission_details.html", {"request": request, "submission": submission, "challenge": challenge, "participant": participant})
+    problem = await QuestionerProblemService.get_problem(submission.problem_id, db)
+    return templates.TemplateResponse("questioner/submission_details.html", {
+        "request": request, 
+        "submission": submission, 
+        "challenge": challenge, 
+        "participant": participant, 
+        "problem": problem
+    })
