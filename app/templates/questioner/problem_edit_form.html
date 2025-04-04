@@ -18,7 +18,9 @@
             <div class="page-header">
                 <div class="breadcrumb-container">
                     <div class="breadcrumb">
-                        <a href="/questioners/challenges" class="breadcrumb-main">ADA Test 2025 - Midterm</a>
+                        <a href="/questioners/challenges" class="breadcrumb-main">{{challenge.title}}</a>
+                        <span class="breadcrumb-separator">/</span>
+                        <a href="/questioners/challenges/{{challenge.id}}/problems" class="breadcrumb-main">Problems</a>
                         <span class="breadcrumb-separator">/</span>
                         <span class="breadcrumb-current">Edit Problem</span>
                     </div>
@@ -44,7 +46,7 @@
                   </div>
                   <div id="error-message" class="error-message" style="display: none;"></div>
                   <div class="button-container">
-                    <button type="submit" data-problem-id="{{ problem.id }}" data-challenge-id="{{ challenge_id }}" mpy-click="update_problem">Update Problem</button>
+                    <button type="submit" data-problem-id="{{ problem.id }}" data-challenge-id="{{ challenge.id }}" mpy-click="update_problem">Update Problem</button>
                   </div>
                 </form>
             </div>

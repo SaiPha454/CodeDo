@@ -17,11 +17,11 @@
         {% include "header.html" %}
         <main class="main-content">
             <div class="breadcrumb">
-                <span class="breadcrumb-item primary">ADA Test 2025 - Midterm</span>
+                <a href="/questioners/challenges" class="breadcrumb-main">{{challenge.title}}</a>
                 <span class="breadcrumb-separator">/</span>
-                <span class="breadcrumb-item secondary text-truncate">Longest Common Subsequence with Dynamic Programming</span>
+                <a href="/questioners/challenges/{{challenge.id}}/problems" class="breadcrumb-main">Problems</a>
                 <span class="breadcrumb-separator">/</span>
-                <span class="breadcrumb-item current">Add TestCases</span>
+                <span class="breadcrumb-current">TestCases</span>
             </div>
     
             <div class="test-cases-container" id="test-cases-container">

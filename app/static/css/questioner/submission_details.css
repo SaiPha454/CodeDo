@@ -400,5 +400,9 @@ body {
 }
 .crump-back {
     text-decoration: none;
+    color: white
+}
+
+.crump-back:hover {
     color: var(--primary-color);
 }

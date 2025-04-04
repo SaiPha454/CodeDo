@@ -71,13 +71,14 @@ body {
 }
 
 .breadcrumb-main {
-    color: #E35205;
+    color: white;
     text-decoration: none;
     transition: opacity 0.2s;
 }
 
 .breadcrumb-main:hover {
     opacity: 0.8;
+    color: #E35205;
 }
 
 .breadcrumb-separator {
@@ -85,7 +86,7 @@ body {
 }
 
 .breadcrumb-current {
-    color: white;
+    color: #808080;
 }
 
 .add-problem-btn {

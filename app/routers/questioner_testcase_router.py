@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import delete
-import json
+from services.questioner_challenge_service import QuestionerChallengeService
 
 from repositories.test_case_model import TestCase
 from config.dbcon import get_db
@@ -24,12 +24,13 @@ async def show_problem_add_test_case_form(
 ):
     test_cases = await QuestionerProblemService.get_test_cases(problem_id, db)
     problem = await QuestionerProblemService.get_problem(problem_id, db)
-
+    challenge = await QuestionerChallengeService.get_challenge(challenge_id, db)
     return templates.TemplateResponse(
         "questioner/testcase_form.html", {
             "request": request,
             "problem": problem,
-            "test_cases": test_cases
+            "test_cases": test_cases,
+            'challenge':challenge
         }
     )
 
